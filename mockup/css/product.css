@@ -76,6 +76,7 @@
 .price-row { display: flex; align-items: baseline; gap: 14px; margin: 6px 0; }
 .price-now { font-family: 'Oswald', sans-serif; font-size: 40px; font-weight: 700; color: var(--red); }
 .price-was { color: var(--muted); text-decoration: line-through; font-size: 20px; }
+.price-unit { color: var(--muted); font-size: 15px; }
 .price-save {
   background: #fbe6dd; color: var(--orange-dark);
   font-weight: 700; font-size: 13px; padding: 3px 10px; border-radius: 999px;

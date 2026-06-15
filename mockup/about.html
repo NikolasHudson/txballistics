@@ -36,16 +36,7 @@
   <nav class="primary-nav">
     <div class="container nav-inner">
       <a href="index.html" class="nav-home" aria-label="Home">⌂</a>
-      <ul class="nav-links">
-        <li><a href="#">Handgun</a></li>
-        <li><a href="#">Rifle</a></li>
-        <li><a href="#">Shotgun</a></li>
-        <li><a href="#">Rimfire</a></li>
-        <li><a href="#">Bulk Ammo</a></li>
-        <li><a href="#" class="nav-special">Specials</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="#">FAQ</a></li>
-      </ul>
+      <ul class="nav-links" data-nav-categories><!-- categories injected by store.js --></ul>
       <form class="nav-search" onsubmit="return false;">
         <input type="search" placeholder="Search by caliber, brand, grain…" aria-label="Search" />
         <button type="submit">Search</button>
@@ -187,5 +178,7 @@
     </div>
   </footer>
 
+  <script src="js/data.js"></script>
+  <script src="js/store.js"></script>
 </body>
 </html>

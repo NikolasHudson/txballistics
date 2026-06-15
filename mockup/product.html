@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>9mm Luger 115gr FMJ — Blazer Brass — 1000 Rounds | TX Ballistics</title>
+  <title>Product — TX Ballistics</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -35,16 +35,7 @@
   <nav class="primary-nav">
     <div class="container nav-inner">
       <a href="index.html" class="nav-home" aria-label="Home">⌂</a>
-      <ul class="nav-links">
-        <li><a href="#">Handgun</a></li>
-        <li><a href="#">Rifle</a></li>
-        <li><a href="#">Shotgun</a></li>
-        <li><a href="#">Rimfire</a></li>
-        <li><a href="#">Bulk Ammo</a></li>
-        <li><a href="#" class="nav-special">Specials</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="#">FAQ</a></li>
-      </ul>
+      <ul class="nav-links" data-nav-categories><!-- categories injected by store.js --></ul>
       <form class="nav-search" onsubmit="return false;">
         <input type="search" placeholder="Search by caliber, brand, grain…" aria-label="Search" />
         <button type="submit">Search</button>
@@ -54,49 +45,42 @@
 
   <!-- ===== Breadcrumb ===== -->
   <div class="breadcrumb">
-    <div class="container">
-      <a href="index.html">Home</a><span class="sep">›</span>
-      <a href="#">Handgun Ammo</a><span class="sep">›</span>
-      <a href="category-cards.html">9mm Luger</a><span class="sep">›</span>
-      <span class="current">Blazer Brass 115gr FMJ</span>
-    </div>
+    <div class="container" id="breadcrumb"><!-- injected by product.js --></div>
   </div>
 
+  <!-- ===== Not found message (shown only if ?id missing/unknown) ===== -->
+  <section class="detail-section" id="not-found" hidden>
+    <div class="container">
+      <h2>Product not found</h2>
+      <p>We couldn't find that product. <a href="index.html">Back to the store →</a></p>
+    </div>
+  </section>
+
   <!-- ===== Top: gallery + buy box ===== -->
-  <section class="product-top">
+  <section class="product-top" id="product-top" hidden>
     <div class="container product-grid">
 
       <!-- Gallery -->
       <div class="gallery">
         <div class="gallery-main">
-          <span class="tested-badge">✓ LAB TESTED</span>
           <span id="gallery-main-label">9mm</span>
-          <span class="video-link">▶ Watch range demo</span>
-        </div>
-        <div class="gallery-thumbs">
-          <button class="active" data-label="9mm">BOX</button>
-          <button data-label="FMJ">ROUND</button>
-          <button data-label="1000">CASE</button>
-          <button data-label="CHRONO">CHRONO</button>
         </div>
       </div>
 
       <!-- Buy box -->
       <div class="buy-box">
-        <h1>9mm Luger — 115gr FMJ — Blazer Brass — 1000 Rounds</h1>
+        <h1 id="p-title">—</h1>
 
         <div class="buy-meta">
-          <span class="buy-rating">★★★★★ <a href="#reviews">(512 reviews)</a></span>
-          <span class="in-stock-pill">84 IN STOCK</span>
-          <span class="buy-sku">SKU: 9MM-BLZ-115</span>
+          <span class="in-stock-pill">IN STOCK</span>
+          <span class="buy-sku" id="p-usage"></span>
         </div>
 
         <div class="price-row">
-          <span class="price-now">$249.99</span>
-          <span class="price-was">$289.99</span>
-          <span class="price-save">Save $40.00</span>
+          <span class="price-now" id="p-price">$0.00</span>
+          <span class="price-unit">per box of <span id="p-rounds-box">0</span></span>
         </div>
-        <span class="cpr-pill">25¢ per round</span>
+        <span class="cpr-pill" id="p-cpr">0¢ per round</span>
 
         <div class="buy-actions">
           <div class="qty-stepper">
@@ -104,150 +88,44 @@
             <input id="qty" type="text" inputmode="numeric" value="1" aria-label="Quantity" />
             <button id="qty-plus" aria-label="Increase quantity">+</button>
           </div>
-          <button class="btn btn-primary add-to-cart" id="main-add">Add to Cart — <span id="buy-total">$249.99</span></button>
+          <button class="btn btn-primary add-to-cart" id="main-add">Add to Cart — <span id="buy-total">$0.00</span></button>
         </div>
-        <p class="cpr-pill" style="background:transparent;color:var(--muted);padding-left:0;">Reserving <span id="buy-rounds">1,000 rounds</span> for local pickup</p>
+        <p class="cpr-pill" style="background:transparent;color:var(--muted);padding-left:0;">Reserving <span id="buy-rounds">0 rounds</span> for local pickup</p>
 
         <ul class="buy-reassure">
           <li><span class="ico">✓</span> In stock now — reserve online, pick up at our Central Texas counter</li>
           <li><span class="ico">✓</span> Backed by our $100 satisfaction guarantee</li>
-          <li><span class="ico">✓</span> Live hand-counted inventory — what you see is on the shelf</li>
+          <li><span class="ico">✓</span> Hand-counted inventory — what you see is on the shelf</li>
           <li><span class="ico">✓</span> Valid ID required at pickup (handgun ammo 21+)</li>
         </ul>
 
-        <div class="quick-specs">
-          <div><span class="k">Caliber</span><span class="v">9mm Luger</span></div>
-          <div><span class="k">Bullet Weight</span><span class="v">115 grain</span></div>
-          <div><span class="k">Bullet Type</span><span class="v">FMJ</span></div>
-          <div><span class="k">Casing</span><span class="v">Brass (boxer)</span></div>
-          <div><span class="k">Rounds</span><span class="v">1,000 / case</span></div>
-          <div><span class="k">Manufacturer</span><span class="v">CCI / Blazer</span></div>
-        </div>
+        <div class="quick-specs" id="quick-specs"><!-- injected by product.js --></div>
       </div>
     </div>
   </section>
 
   <!-- ===== Description ===== -->
-  <section class="detail-section alt">
+  <section class="detail-section alt" id="description-section" hidden>
     <div class="container">
       <h2>Description</h2>
-      <p>Blazer Brass 9mm is the workhorse range load Texas shooters buy by the case. Reloadable brass cases, reliable CCI primers, and a 115-grain full metal jacket bullet make it clean-feeding in everything from compact carry guns to full-size competition pistols.</p>
-      <p>This is the load we hand to new shooters at the range and stack on the shelf for our own practice. Consistent velocity, low fouling, and a price-per-round that's hard to beat when you buy the 1,000-round case.</p>
-      <ul class="facts">
-        <li>Brass-cased and fully reloadable — save your spent casings</li>
-        <li>Reliable feeding and consistent ignition with CCI primers</li>
-        <li>Non-corrosive, boxer-primed for easy cleanup</li>
-        <li>Ideal for high-volume range days, training, and competition practice</li>
-      </ul>
+      <p id="p-description"></p>
+      <p>Reserve online and pick it up at our Central Texas counter. Every count is hand-verified before pickup — if it's listed here, it's on the shelf.</p>
     </div>
   </section>
 
   <!-- ===== Specifications ===== -->
-  <section class="detail-section">
+  <section class="detail-section" id="spec-section" hidden>
     <div class="container">
       <h2>Specifications</h2>
-      <table class="spec-table">
-        <tr><td class="k">Caliber</td><td>9mm Luger (9x19mm)</td></tr>
-        <tr><td class="k">Bullet Weight</td><td>115 grain</td></tr>
-        <tr><td class="k">Bullet Type</td><td>Full Metal Jacket (FMJ)</td></tr>
-        <tr><td class="k">Casing Material</td><td>Brass (boxer-primed, reloadable)</td></tr>
-        <tr><td class="k">Primer</td><td>Boxer / non-corrosive</td></tr>
-        <tr><td class="k">Muzzle Velocity</td><td>1,145 fps</td></tr>
-        <tr><td class="k">Muzzle Energy</td><td>335 ft-lbs</td></tr>
-        <tr><td class="k">Rounds Per Case</td><td>1,000 (20 boxes of 50)</td></tr>
-        <tr><td class="k">Manufacturer</td><td>CCI / Blazer Brass</td></tr>
-        <tr><td class="k">Use Type</td><td>Range / Training</td></tr>
-        <tr><td class="k">Magnetic</td><td>No</td></tr>
-      </table>
-    </div>
-  </section>
-
-  <!-- ===== Test Data ===== -->
-  <section class="detail-section alt">
-    <div class="container">
-      <h2>★ Our Lab Test Data</h2>
-      <p>We chronographed this lot from a 4.5" barrel over 10 rounds. Here's what we actually measured — not just the box claims.</p>
-      <div class="testdata-grid">
-        <div class="testdata"><div class="num">1,142</div><div class="label">Avg Velocity (fps)</div></div>
-        <div class="testdata"><div class="num">18</div><div class="label">Std Dev (fps)</div></div>
-        <div class="testdata"><div class="num">333</div><div class="label">Avg Energy (ft-lbs)</div></div>
-        <div class="testdata"><div class="num">2.1"</div><div class="label">10-yd Group</div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== Reviews ===== -->
-  <section class="detail-section" id="reviews">
-    <div class="container">
-      <h2>Customer Reviews</h2>
-      <div class="reviews-summary">
-        <div class="reviews-score">
-          <div class="big">4.9</div>
-          <div class="stars">★★★★★</div>
-          <div class="count">512 reviews</div>
-        </div>
-        <a href="#" class="btn btn-primary">Write a Review</a>
-      </div>
-
-      <div class="review">
-        <div class="head">
-          <span class="who">Travis B. <span class="verified">✓ Verified Pickup</span></span>
-          <span class="stars">★★★★★</span>
-        </div>
-        <p>Runs flawless in my Glock 19 and my buddy's CZ. Picked up two cases for a class and not a single malfunction. Best 9mm price in the Hill Country.</p>
-        <span class="date">March 2026</span>
-      </div>
-
-      <div class="review">
-        <div class="head">
-          <span class="who">Dana R. <span class="verified">✓ Verified Pickup</span></span>
-          <span class="stars">★★★★★</span>
-        </div>
-        <p>Clean burning and the brass reloads great. Counts were dead-on and it was bagged and ready when I got there. My go-to range load now.</p>
-        <span class="date">February 2026</span>
-      </div>
-
-      <div class="review">
-        <div class="head">
-          <span class="who">Marco L. <span class="verified">✓ Verified Pickup</span></span>
-          <span class="stars">★★★★☆</span>
-        </div>
-        <p>Solid practice ammo at a fair price. A little dirtier than premium stuff but you can't beat it by the case. Would buy again.</p>
-        <span class="date">January 2026</span>
-      </div>
+      <table class="spec-table" id="spec-table"><!-- injected by product.js --></table>
     </div>
   </section>
 
   <!-- ===== Related ===== -->
-  <section class="related">
+  <section class="related" id="related-section" hidden>
     <div class="container">
-      <h2>You Might Also Like</h2>
-      <div class="related-grid">
-        <a href="product.html" class="related-card">
-          <div class="rimg">9mm</div>
-          <h3>9mm 124gr FMJ — Magtech — 1000 Rounds</h3>
-          <div class="rprice">$259.99</div>
-          <span class="btn btn-primary btn-block add-to-cart">Add to Cart</span>
-        </a>
-        <a href="product.html" class="related-card">
-          <div class="rimg">9mm</div>
-          <h3>9mm 147gr FMJ Subsonic — Federal — 500 Rounds</h3>
-          <div class="rprice">$164.99</div>
-          <span class="btn btn-primary btn-block add-to-cart">Add to Cart</span>
-        </a>
-        <a href="product.html" class="related-card">
-          <div class="rimg">9mm</div>
-          <h3>9mm 124gr JHP — Speer Gold Dot — 50 Rounds</h3>
-          <div class="rprice">$39.99</div>
-          <span class="btn btn-primary btn-block add-to-cart">Add to Cart</span>
-        </a>
-        <a href="product.html" class="related-card">
-          <div class="rimg">9mm</div>
-          <h3>9mm 115gr FMJ — PMC Bronze — 1000 Rounds</h3>
-          <div class="rprice">$244.99</div>
-          <span class="btn btn-primary btn-block add-to-cart">Add to Cart</span>
-        </a>
-      </div>
+      <h2>More <span id="related-caliber"></span> Loads</h2>
+      <div class="related-grid" id="related-grid"><!-- injected by product.js --></div>
     </div>
   </section>
 
@@ -275,6 +153,8 @@
     </div>
   </footer>
 
+  <script src="js/data.js"></script>
+  <script src="js/store.js"></script>
   <script src="js/product.js"></script>
 </body>
 </html>

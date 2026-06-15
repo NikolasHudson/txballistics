@@ -15,7 +15,7 @@
   <!-- ===== TIER 1: Top Utility Bar ===== -->
   <div class="utility-bar">
     <div class="container utility-inner">
-      <a href="#" class="logo">
+      <a href="index.html" class="logo">
         <span class="logo-star">★</span>
         <span class="logo-text">TX<strong>BALLISTICS</strong></span>
       </a>
@@ -37,17 +37,8 @@
   <!-- ===== TIER 2: Primary Navigation ===== -->
   <nav class="primary-nav">
     <div class="container nav-inner">
-      <a href="#" class="nav-home" aria-label="Home">⌂</a>
-      <ul class="nav-links">
-        <li><a href="#">Handgun</a></li>
-        <li><a href="#">Rifle</a></li>
-        <li><a href="#">Shotgun</a></li>
-        <li><a href="#">Rimfire</a></li>
-        <li><a href="#">Bulk Ammo</a></li>
-        <li><a href="#" class="nav-special">Specials</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">FAQ</a></li>
-      </ul>
+      <a href="index.html" class="nav-home" aria-label="Home">⌂</a>
+      <ul class="nav-links" data-nav-categories><!-- categories injected by store.js --></ul>
       <form class="nav-search" onsubmit="return false;">
         <input type="search" placeholder="Search by caliber, brand, grain…" aria-label="Search" />
         <button type="submit">Search</button>
@@ -67,23 +58,12 @@
           <a href="#specials" class="btn btn-ghost">View This Week's Specials</a>
         </div>
         <ul class="hero-badges">
-          <li><strong>52,000+</strong> rounds in stock</li>
-          <li><strong>4.9★</strong> from 3,100+ reviews</li>
-          <li><strong>FFL</strong> compliant &amp; insured</li>
+          <li><strong>Handgun &amp; Rifle</strong> loads in stock</li>
+          <li><strong>Local pickup</strong> in Central Texas</li>
+          <li><strong>$100</strong> satisfaction guarantee</li>
         </ul>
       </div>
-      <div class="hero-card">
-        <span class="stock-tag">DEAL OF THE DAY</span>
-        <div class="hero-card-img">9mm</div>
-        <h3>9mm Luger — 115gr FMJ</h3>
-        <p class="hero-card-brand">Blazer Brass · 1,000 Rounds</p>
-        <div class="hero-card-price">
-          <span class="price-now">$249.99</span>
-          <span class="price-was">$289.99</span>
-        </div>
-        <p class="cpr">25¢ / round</p>
-        <button class="btn btn-primary btn-block add-to-cart">Add to Cart</button>
-      </div>
+      <div class="hero-card" id="hero-deal"><!-- best-value product injected by main.js --></div>
     </div>
   </header>
 
@@ -102,16 +82,8 @@
     <div class="container">
       <div class="section-head">
         <h2>Shop by Category</h2>
-        <a href="#" class="see-all">View all calibers →</a>
       </div>
-      <div class="category-grid">
-        <a href="#" class="cat-card"><h3>Handgun<br />Ammo</h3><p>9mm · .45 ACP · .380 · .40 S&amp;W</p></a>
-        <a href="#" class="cat-card"><h3>Rifle<br />Ammo</h3><p>5.56 · .223 · .308 · 7.62x39</p></a>
-        <a href="#" class="cat-card"><h3>Shotgun<br />Ammo</h3><p>12ga · 20ga · 410 · Buckshot</p></a>
-        <a href="#" class="cat-card"><h3>Rimfire<br />Ammo</h3><p>.22 LR · .22 WMR · .17 HMR</p></a>
-        <a href="#" class="cat-card"><h3>Bulk<br />&amp; Cases</h3><p>500 / 1000 round value packs</p></a>
-        <a href="#" class="cat-card"><h3>Self<br />Defense</h3><p>JHP · +P · Premium carry loads</p></a>
-      </div>
+      <div class="category-grid" id="category-grid"><!-- categories injected by main.js --></div>
     </div>
   </section>
 
@@ -119,20 +91,9 @@
   <section class="section section-alt" id="specials">
     <div class="container">
       <div class="section-head">
-        <h2>This Week's Specials</h2>
-        <a href="#" class="see-all">See all deals →</a>
+        <h2>Best Value by the Box</h2>
       </div>
-      <div class="product-list" id="product-list"><!-- product cards injected by JS --></div>
-    </div>
-  </section>
-
-  <!-- ===== HAPPY CUSTOMERS ===== -->
-  <section class="section">
-    <div class="container">
-      <div class="section-head center">
-        <h2>Happy Customers</h2>
-      </div>
-      <div class="testimonials" id="testimonials"><!-- rotating quote injected by JS --></div>
+      <div class="product-list" id="product-list"><!-- product cards injected by main.js --></div>
     </div>
   </section>
 
@@ -166,12 +127,12 @@
   <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <div class="container footer-inner">
-      <a href="#" class="logo footer-logo">
+      <a href="index.html" class="logo footer-logo">
         <span class="logo-star">★</span>
         <span class="logo-text">TX<strong>BALLISTICS</strong></span>
       </a>
       <ul class="footer-links">
-        <li><a href="#">About Us</a></li>
+        <li><a href="about.html">About Us</a></li>
         <li><a href="#">Store &amp; Pickup</a></li>
         <li><a href="#">Free Targets</a></li>
         <li><a href="#">Terms &amp; Conditions</a></li>
@@ -187,6 +148,8 @@
     </div>
   </footer>
 
+  <script src="js/data.js"></script>
+  <script src="js/store.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

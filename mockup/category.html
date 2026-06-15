@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop Ammo — TX Ballistics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/category.css" />
+</head>
+<body>
+
+  <!-- ===== TIER 1: Top Utility Bar ===== -->
+  <div class="utility-bar">
+    <div class="container utility-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-star">★</span>
+        <span class="logo-text">TX<strong>BALLISTICS</strong></span>
+      </a>
+      <ul class="trust-bullets">
+        <li><span class="check">✓</span> In Stock &amp; Ready</li>
+        <li><span class="check">✓</span> Local Pickup</li>
+        <li><span class="check">✓</span> $100 Guarantee</li>
+      </ul>
+      <div class="utility-actions">
+        <a href="signin.html" class="util-link account-link"><span class="util-ico">👤</span> Account</a>
+        <a href="cart.html" class="util-link cart-link"><span class="util-ico">🛒</span> Cart <span class="cart-count">0</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TIER 2: Primary Navigation ===== -->
+  <nav class="primary-nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-home" aria-label="Home">⌂</a>
+      <ul class="nav-links" data-nav-categories><!-- categories injected by store.js --></ul>
+      <form class="nav-search" onsubmit="return false;">
+        <input type="search" placeholder="Search by caliber, brand, grain…" aria-label="Search" />
+        <button type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+
+  <!-- ===== Breadcrumb ===== -->
+  <div class="breadcrumb">
+    <div class="container" id="breadcrumb"><!-- injected by category.js --></div>
+  </div>
+
+  <!-- ===== Two-column layout ===== -->
+  <div class="container cat-layout">
+
+    <!-- Left sidebar -->
+    <aside class="cat-sidebar" id="cat-sidebar"><!-- injected by category.js --></aside>
+
+    <!-- Main listing -->
+    <main class="cat-main">
+      <h1 id="cat-title">Shop Ammo</h1>
+      <p class="cat-intro" id="cat-intro"></p>
+
+      <div class="listing-toolbar">
+        <span class="result-count" id="result-count"></span>
+        <div class="toolbar-right">
+          <div class="view-toggle">
+            <a href="#" data-view="cards" class="active">▦ Cards</a>
+            <a href="#" data-view="table">☰ List</a>
+          </div>
+          <label>Sort:
+            <select id="sort-select">
+              <option value="cpr">Cost Per Round (low → high)</option>
+              <option value="price-asc">Price (low → high)</option>
+              <option value="price-desc">Price (high → low)</option>
+              <option value="grain">Bullet Weight</option>
+              <option value="caliber">Caliber (A → Z)</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="cat-cards" id="cat-cards"><!-- card view --></div>
+
+      <div class="ammo-table-wrap" id="cat-table-wrap" hidden>
+        <table class="ammo-table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Caliber</th>
+              <th class="num">Grain</th>
+              <th>Best For</th>
+              <th class="num">Rounds</th>
+              <th class="num">Cost/Rd</th>
+              <th class="num">Price</th>
+              <th class="center">Buy</th>
+            </tr>
+          </thead>
+          <tbody id="cat-table"><!-- table rows --></tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <a href="index.html" class="logo footer-logo">
+        <span class="logo-star">★</span>
+        <span class="logo-text">TX<strong>BALLISTICS</strong></span>
+      </a>
+      <ul class="footer-links">
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="#">Store &amp; Pickup</a></li>
+        <li><a href="#">Free Targets</a></li>
+        <li><a href="#">Terms &amp; Conditions</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Texas Gun Laws</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>© 2026 TX Ballistics, LLC · Central Texas · Must be 18+ (handgun ammo 21+) to purchase.</p>
+        <span class="bbb-badge">★ BBB Accredited</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/category.js"></script>
+</body>
+</html>

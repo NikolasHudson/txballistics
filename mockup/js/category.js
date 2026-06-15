@@ -1,114 +1,197 @@
 /* ===========================================================
-   TX Ballistics — Category page (9mm Luger)
-   Shared product data + two renderers:
-     #cat-cards  -> horizontal card view (matches homepage)
-     #cat-table  -> spreadsheet / table view with quantity on right
+   TX Ballistics — Category listing (data-driven)
+   Reads ?cat= and optional ?caliber= from the URL and renders
+   the real catalog: sidebar of calibers, usage filter, sort,
+   and a card/table view toggle.
    =========================================================== */
 
-const NINE_MM = [
-  { cal: "9mm", title: "9mm Luger — 115gr FMJ — Blazer Brass", brand: "Blazer", bullet: "FMJ", grain: 115, casing: "Brass", rounds: 1000, rating: 5, reviews: 512, price: 249.99, was: 289.99, cprNum: 0.25, stock: 84, tested: true },
-  { cal: "9mm", title: "9mm Luger — 124gr FMJ — Magtech", brand: "Magtech", bullet: "FMJ", grain: 124, casing: "Brass", rounds: 1000, rating: 5, reviews: 301, price: 259.99, was: null, cprNum: 0.26, stock: 47, tested: false },
-  { cal: "9mm", title: "9mm Luger — 115gr FMJ — Winchester White Box", brand: "Winchester", bullet: "FMJ", grain: 115, casing: "Brass", rounds: 500, rating: 4, reviews: 188, price: 139.99, was: 154.99, cprNum: 0.28, stock: 23, tested: false },
-  { cal: "9mm", title: "9mm Luger — 124gr JHP — Speer Gold Dot (Defense)", brand: "Speer", bullet: "JHP", grain: 124, casing: "Brass", rounds: 50, rating: 5, reviews: 96, price: 39.99, was: null, cprNum: 0.80, stock: 9, tested: true },
-  { cal: "9mm", title: "9mm Luger — 147gr FMJ Subsonic — Federal", brand: "Federal", bullet: "FMJ", grain: 147, casing: "Brass", rounds: 500, rating: 5, reviews: 142, price: 164.99, was: 179.99, cprNum: 0.33, stock: 31, tested: true },
-  { cal: "9mm", title: "9mm Luger — 115gr FMJ Steel Case — Tula", brand: "Tula", bullet: "FMJ", grain: 115, casing: "Steel", rounds: 1000, rating: 3, reviews: 64, price: 219.99, was: null, cprNum: 0.22, stock: 5, tested: false },
-  { cal: "9mm", title: "9mm Luger — 124gr +P JHP — Hornady Critical Duty", brand: "Hornady", bullet: "JHP", grain: 124, casing: "Brass", rounds: 25, rating: 5, reviews: 77, price: 27.99, was: null, cprNum: 1.12, stock: 14, tested: true },
-  { cal: "9mm", title: "9mm Luger — 115gr FMJ — PMC Bronze", brand: "PMC", bullet: "FMJ", grain: 115, casing: "Brass", rounds: 1000, rating: 4, reviews: 233, price: 244.99, was: 264.99, cprNum: 0.24, stock: 58, tested: false },
-  { cal: "9mm", title: "9mm Luger — 124gr FMJ — Sellier & Bellot", brand: "S&B", bullet: "FMJ", grain: 124, casing: "Brass", rounds: 1000, rating: 4, reviews: 119, price: 234.99, was: null, cprNum: 0.23, stock: 0, tested: false },
-  { cal: "9mm", title: "9mm Luger — 115gr JHP — Remington UMC", brand: "Remington", bullet: "JHP", grain: 115, casing: "Brass", rounds: 500, rating: 4, reviews: 88, price: 199.99, was: 219.99, cprNum: 0.40, stock: 12, tested: false }
-];
+const state = {
+  cat: TXB.param("cat") || TXB.categories()[0],
+  caliber: TXB.param("caliber") || null,
+  view: "cards",
+  sort: "cpr",
+  usages: new Set(), // empty = show all
+};
 
-const money = n => "$" + n.toFixed(2);
-const cents = n => Math.round(n * 100) + "¢";
-const star  = n => "★★★★★".slice(0, n) + "☆☆☆☆☆".slice(0, 5 - n);
-
-function stockClass(s) { return s === 0 ? "out" : s <= 12 ? "low" : ""; }
-function stockLabel(s) { return s === 0 ? "Out of Stock" : s + " in stock"; }
-
-/* ---------- Variation A: cards (matches homepage product cards) ---------- */
-function renderCards() {
-  const wrap = document.getElementById("cat-cards");
-  if (!wrap) return;
-  wrap.innerHTML = NINE_MM.map(p => {
-    const out = p.stock === 0;
-    const priceBlock = p.was
-      ? `<span class="pc-was">${money(p.was)}</span><span class="pc-price sale">${money(p.price)}</span>`
-      : `<span class="pc-price">${money(p.price)}</span>`;
-    return `
-      <article class="product-card">
-        <span class="stock-badge ${stockClass(p.stock)}">${out ? "OUT OF STOCK" : p.stock + " IN STOCK"}</span>
-        <div class="pc-img">${p.cal}</div>
-        <div class="pc-body">
-          ${p.tested ? '<span class="tested-badge">TESTED</span>' : ""}
-          <h3>${p.title}</h3>
-          <div class="pc-rating">${star(p.rating)} <span>(${p.reviews} reviews)</span></div>
-          <ul class="pc-specs">
-            <li>${p.rounds.toLocaleString()} rounds</li>
-            <li>${p.brand}</li>
-            <li>${p.grain}gr ${p.bullet}</li>
-            <li>${p.casing} case</li>
-          </ul>
-        </div>
-        <div class="pc-buy">
-          <div>${priceBlock}</div>
-          <span class="pc-cpr">${cents(p.cprNum)} / round</span>
-          <button class="btn btn-primary btn-block add-to-cart" ${out ? "disabled" : ""}>${out ? "Notify Me" : "Add to Cart"}</button>
-        </div>
-      </article>`;
-  }).join("");
+/* ---------- helpers ---------- */
+function baseSet() {
+  let items = TXB.byCategory(state.cat);
+  if (state.caliber) items = items.filter((p) => p.caliber === state.caliber);
+  return items;
 }
 
-/* ---------- Variation B: spreadsheet / table view ---------- */
-function renderTable() {
-  const body = document.getElementById("cat-table");
-  if (!body) return;
-  body.innerHTML = NINE_MM.map(p => {
-    const out = p.stock === 0;
-    const priceBlock = p.was
-      ? `<span class="t-was">${money(p.was)}</span><span class="t-price sale">${money(p.price)}</span>`
-      : `<span class="t-price">${money(p.price)}</span>`;
-    return `
+// Usage filter options come from whatever's actually in this caliber/category.
+function usageOptions(items) {
+  const out = [];
+  items.forEach((p) => {
+    if (p.usage && !out.includes(p.usage)) out.push(p.usage);
+  });
+  return out.sort();
+}
+
+function applyFilterSort(items) {
+  let out = items;
+  if (state.usages.size) out = out.filter((p) => state.usages.has(p.usage));
+  const sorters = {
+    cpr: (a, b) => a.costPerRound - b.costPerRound,
+    "price-asc": (a, b) => a.cost - b.cost,
+    "price-desc": (a, b) => b.cost - a.cost,
+    grain: (a, b) => (a.grain || 0) - (b.grain || 0),
+    caliber: (a, b) => a.caliber.localeCompare(b.caliber),
+  };
+  return [...out].sort(sorters[state.sort] || sorters.cpr);
+}
+
+/* ---------- renderers ---------- */
+function renderBreadcrumb() {
+  const el = document.getElementById("breadcrumb");
+  el.innerHTML =
+    `<a href="index.html">Home</a><span class="sep">›</span>` +
+    `<a href="${TXB.categoryHref(state.cat)}">${state.cat} Ammo</a>` +
+    (state.caliber
+      ? `<span class="sep">›</span><span class="current">${state.caliber}</span>`
+      : `<span class="sep">›</span><span class="current">All ${state.cat}</span>`);
+}
+
+function renderHeading() {
+  const title = state.caliber ? `${state.caliber} Ammo` : `${state.cat} Ammo`;
+  document.getElementById("cat-title").textContent = title;
+  document.getElementById("cat-intro").textContent = state.caliber
+    ? `In-stock ${state.caliber} loads, ready for local pickup in Central Texas. Compare grain, box count, and cost per round.`
+    : `Every ${state.cat.toLowerCase()} caliber we carry — reserve online and pick it up at our Central Texas counter.`;
+  document.title = `${title} — TX Ballistics`;
+}
+
+function renderSidebar() {
+  const aside = document.getElementById("cat-sidebar");
+  const cals = TXB.calibersFor(state.cat);
+  const others = TXB.categories().filter((c) => c !== state.cat);
+  const usages = usageOptions(baseSet());
+
+  aside.innerHTML = `
+    <div class="side-block">
+      <div class="side-head">${state.cat} Ammo</div>
+      <ul class="side-list">
+        <li class="${!state.caliber ? "active" : ""}">
+          <a href="${TXB.categoryHref(state.cat)}">All ${state.cat} <span class="count">${TXB.byCategory(state.cat).length}</span></a>
+        </li>
+        ${cals
+          .map(
+            (c) => `<li class="${state.caliber === c.caliber ? "active" : ""}">
+              <a href="${TXB.categoryHref(state.cat, c.caliber)}">${c.caliber} <span class="count">${c.count}</span></a>
+            </li>`
+          )
+          .join("")}
+      </ul>
+    </div>
+    ${
+      others.length
+        ? `<div class="side-block">
+            <div class="side-head">More Categories</div>
+            <ul class="side-list">
+              ${others.map((c) => `<li><a href="${TXB.categoryHref(c)}">${c} Ammo</a></li>`).join("")}
+            </ul>
+          </div>`
+        : ""
+    }
+    ${
+      usages.length > 1
+        ? `<div class="side-block">
+            <div class="side-head">Best For</div>
+            <div class="filter-group" id="usage-filter">
+              ${usages
+                .map(
+                  (u) =>
+                    `<label><input type="checkbox" value="${u}" ${
+                      state.usages.has(u) ? "checked" : ""
+                    } /> ${u}</label>`
+                )
+                .join("")}
+            </div>
+          </div>`
+        : ""
+    }`;
+
+  const filter = document.getElementById("usage-filter");
+  if (filter) {
+    filter.addEventListener("change", (e) => {
+      const cb = e.target.closest("input[type=checkbox]");
+      if (!cb) return;
+      if (cb.checked) state.usages.add(cb.value);
+      else state.usages.delete(cb.value);
+      renderListing();
+    });
+  }
+}
+
+function renderCards(items) {
+  document.getElementById("cat-cards").innerHTML = items.map(TXB.productCard).join("");
+}
+
+function renderTable(items) {
+  document.getElementById("cat-table").innerHTML = items
+    .map(
+      (p) => `
       <tr>
         <td>
           <div class="tcell-product">
-            <span class="tcell-thumb">${p.cal}</span>
-            <span class="tcell-title">${p.title}
-              ${p.tested ? '<span class="tested-inline"> ✓ TESTED</span>' : ""}
-            </span>
+            <a class="tcell-thumb" href="${TXB.productHref(p)}">${p.calShort || p.caliber}</a>
+            <a class="tcell-title" href="${TXB.productHref(p)}">${p.description || p.name}</a>
           </div>
         </td>
-        <td>${p.brand}</td>
-        <td>${p.bullet}</td>
-        <td class="num">${p.grain} gr</td>
-        <td>${p.casing}</td>
-        <td class="num">${p.rounds.toLocaleString()}</td>
-        <td class="num t-cpr">${cents(p.cprNum)}</td>
-        <td class="num">${priceBlock}</td>
-        <td class="num"><span class="t-stock ${stockClass(p.stock)}">${stockLabel(p.stock)}</span></td>
+        <td>${p.caliber}</td>
+        <td class="num">${p.grain ? p.grain + " gr" : "—"}</td>
+        <td>${p.usage || "—"}</td>
+        <td class="num">${p.roundsPerBox}</td>
+        <td class="num t-cpr">${TXB.cents(p.costPerRound)}</td>
+        <td class="num"><span class="t-price">${TXB.money(p.cost)}</span></td>
         <td class="center">
-          <button class="btn btn-primary t-buy add-to-cart" ${out ? "disabled" : ""}>${out ? "Notify" : "Add"}</button>
+          <button class="btn btn-primary t-buy add-to-cart" data-id="${p.id}">Add</button>
         </td>
-      </tr>`;
-  }).join("");
+      </tr>`
+    )
+    .join("");
 }
 
-/* ---------- Cart counter (shared with homepage behavior) ---------- */
-function wireCart() {
-  const countEl = document.querySelector(".cart-count");
-  let count = 0;
-  document.body.addEventListener("click", e => {
-    const btn = e.target.closest(".add-to-cart");
-    if (!btn || btn.disabled) return;
-    count += 1;
-    if (countEl) countEl.textContent = count;
-    const original = btn.textContent;
-    btn.textContent = "✓";
-    setTimeout(() => { btn.textContent = original; }, 1000);
+function renderListing() {
+  const total = baseSet().length;
+  const items = applyFilterSort(baseSet());
+  document.getElementById("result-count").innerHTML =
+    `Showing <strong>${items.length}</strong> of ${total} in stock`;
+  renderCards(items);
+  renderTable(items);
+
+  const cards = document.getElementById("cat-cards");
+  const table = document.getElementById("cat-table-wrap");
+  const isCards = state.view === "cards";
+  cards.hidden = !isCards;
+  table.hidden = isCards;
+  document.querySelectorAll(".view-toggle [data-view]").forEach((a) => {
+    a.classList.toggle("active", a.dataset.view === state.view);
+  });
+}
+
+/* ---------- wiring ---------- */
+function wireToolbar() {
+  document.querySelectorAll(".view-toggle [data-view]").forEach((a) => {
+    a.addEventListener("click", (e) => {
+      e.preventDefault();
+      state.view = a.dataset.view;
+      renderListing();
+    });
+  });
+  const sort = document.getElementById("sort-select");
+  sort.value = state.sort;
+  sort.addEventListener("change", () => {
+    state.sort = sort.value;
+    renderListing();
   });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  renderCards();
-  renderTable();
-  wireCart();
+  renderBreadcrumb();
+  renderHeading();
+  renderSidebar();
+  wireToolbar();
+  renderListing();
 });
