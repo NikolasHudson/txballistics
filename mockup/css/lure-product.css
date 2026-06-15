@@ -1,0 +1,57 @@
+/* ===========================================================
+   TX Ballistics — Fishing Lure product page
+   Layers a water-blue accent + color-swatch picker on top of
+   styles.css and product.css (reuses gallery / buy-box / specs).
+   =========================================================== */
+
+:root {
+  --water:       #1b6b8f;   /* lake blue */
+  --water-dark:  #134f6a;
+  --water-light: #2c8fb8;
+}
+
+/* Fishing nav link mirrors the orange "Specials" highlight, but blue */
+.nav-fishing { color: #cfe9f2 !important; font-weight: 700; }
+.nav-fishing:hover { color: #fff !important; }
+
+/* Lure gallery uses a soft watery wash instead of the sand stripe */
+.gallery-main.lure-main {
+  background: linear-gradient(160deg, #e8f2f6 0%, #d3e6ef 60%, #bcd9e6 100%);
+  font-size: 120px;
+  color: var(--water-dark);
+}
+
+/* Tank-tested badge + in-stock pill in water blue */
+.tested-badge.water { background: var(--water-dark); }
+.in-stock-pill.water { background: var(--water-light); }
+
+/* ---------- Color / pattern swatch picker ---------- */
+.swatch-block { margin: 18px 0 4px; }
+.swatch-label { font-size: 14px; color: var(--muted); margin-bottom: 8px; }
+.swatch-label span { color: var(--ink); font-weight: 700; }
+.swatches { display: flex; gap: 10px; flex-wrap: wrap; }
+.swatch {
+  width: 42px; height: 42px; border-radius: 50%; cursor: pointer; padding: 0;
+  border: 2px solid var(--line);
+  background: linear-gradient(135deg, var(--sw1) 0%, var(--sw1) 50%, var(--sw2) 50%, var(--sw2) 100%);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+.swatch:hover { transform: translateY(-2px); }
+.swatch.active {
+  border-color: var(--water);
+  box-shadow: 0 0 0 3px rgba(27,107,143,0.25);
+}
+
+/* Shipping note under the buy button (replaces the pickup line) */
+.ship-note { font-size: 13px; color: var(--muted); margin: 2px 0 0; }
+.ship-note span { color: var(--green-dark); font-weight: 600; }
+
+/* On-the-water test cards swap the orange rail for a blue one */
+.testdata.water { border-left-color: var(--water); }
+
+/* Related-card image wash for tackle items */
+.related-card .rimg.lure {
+  background: linear-gradient(160deg, #e8f2f6 0%, #cfe3ec 100%);
+  color: var(--water-dark);
+  font-size: 40px;
+}

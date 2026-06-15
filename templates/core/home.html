@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% load static catalog_extras %}
+
+{% block body %}
+  <!-- ===== HERO ===== -->
+  <header class="hero">
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <p class="hero-eyebrow">★ Family-owned in Central Texas</p>
+        <h1>Quality Ammo.<br />Honest Prices.<br />Reserved for Pickup.</h1>
+        <p class="hero-sub">Real in-stock inventory from a Texas dealer who shoots what he sells. Reserve online and pick it up locally — what you see is on the shelf.</p>
+        <div class="hero-cta">
+          <a href="#categories" class="btn btn-primary">Shop All Ammo</a>
+          <a href="#specials" class="btn btn-ghost">View This Week's Specials</a>
+        </div>
+        <ul class="hero-badges">
+          <li><strong>52,000+</strong> rounds in stock</li>
+          <li><strong>4.9★</strong> from 3,100+ reviews</li>
+          <li><strong>FFL</strong> compliant &amp; insured</li>
+        </ul>
+      </div>
+      {% if hero %}
+      <div class="hero-card">
+        <span class="stock-tag">DEAL OF THE DAY</span>
+        <a href="{{ hero.get_absolute_url }}" class="hero-card-img">{% if hero.image %}<img src="{{ hero.image.url }}" alt="{{ hero.title }}" />{% else %}{{ hero.caliber_label }}{% endif %}</a>
+        <h3>{{ hero.title }}</h3>
+        <p class="hero-card-brand">{% if hero.manufacturer %}{{ hero.manufacturer.name }} · {% endif %}{% if hero.rounds_per_unit %}{{ hero.rounds_per_unit }} Rounds{% endif %}</p>
+        <div class="hero-card-price">
+          <span class="price-now">${{ hero.current_price }}</span>
+          {% if hero.is_on_sale %}<span class="price-was">${{ hero.price }}</span>{% endif %}
+        </div>
+        {% if hero.cost_per_round %}<p class="cpr">{{ hero.cost_per_round_cents }} / round</p>{% endif %}
+        {% if not site_config.catalog_mode %}
+        <form hx-post="{% url 'cart:add' %}" hx-target=".cart-count" hx-swap="innerHTML">
+          <input type="hidden" name="product_id" value="{{ hero.id }}" />
+          <button class="btn btn-primary btn-block add-to-cart" type="submit">Add to Cart</button>
+        </form>
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+  </header>
+
+  <!-- ===== TRUST STRIP ===== -->
+  <section class="trust-strip">
+    <div class="container trust-grid">
+      <div class="trust-item"><span class="trust-ico">📍</span><div><strong>Local Pickup</strong><p>Reserve online, grab it in person</p></div></div>
+      <div class="trust-item"><span class="trust-ico">🛡️</span><div><strong>{{ site_config.guarantee_copy }}</strong><p>Not happy? We make it right.</p></div></div>
+      <div class="trust-item"><span class="trust-ico">📦</span><div><strong>Real Inventory</strong><p>If it's listed, it's on the shelf.</p></div></div>
+      <div class="trust-item"><span class="trust-ico">⭐</span><div><strong>Texas Service</strong><p>Real shooters behind the counter</p></div></div>
+    </div>
+  </section>
+
+  <!-- ===== SHOP BY CATEGORY ===== -->
+  <section class="section" id="categories">
+    <div class="container">
+      <div class="section-head">
+        <h2>Shop by Category</h2>
+      </div>
+      <div class="category-grid">
+        {% for cat in categories %}
+          <a href="{{ cat.get_absolute_url }}" class="cat-card"><h3>{{ cat.name }}</h3><p>{{ cat.blurb|default:"" }}</p></a>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FEATURED / SPECIALS ===== -->
+  {% if specials %}
+  <section class="section section-alt" id="specials">
+    <div class="container">
+      <div class="section-head">
+        <h2>This Week's Specials</h2>
+      </div>
+      <div class="product-list">
+        {% for p in specials %}{% include "partials/_product_card.html" %}{% endfor %}
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+  <!-- ===== HAPPY CUSTOMERS ===== -->
+  {% if testimonials %}
+  <section class="section">
+    <div class="container">
+      <div class="section-head center"><h2>Happy Customers</h2></div>
+      <div class="testimonials" id="testimonials"></div>
+    </div>
+  </section>
+  {{ testimonials_data|json_script:"quotes-data" }}
+  {% endif %}
+
+  <!-- ===== NEWSLETTER ===== -->
+  <section class="newsletter">
+    <div class="container newsletter-inner">
+      <div>
+        <h2>Get Restock Alerts &amp; Deals</h2>
+        <p>Be first to know when hard-to-find calibers hit the shelf. No spam — just ammo.</p>
+      </div>
+      <form class="newsletter-form" hx-post="{% url 'marketing:subscribe' %}" hx-swap="outerHTML">
+        <input type="email" name="email" placeholder="you@email.com" aria-label="Email address" required />
+        <button class="btn btn-accent" type="submit">Sign Up!</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===== QUICK FACTS / SEO ===== -->
+  <section class="section quick-facts">
+    <div class="container">
+      <h2>Why Shoppers Trust TX Ballistics</h2>
+      <ul>
+        <li>Based in the Texas Hill Country — reserve online and pick up your order in person.</li>
+        <li>All inventory counts are live; you'll never reserve ammo we don't actually have.</li>
+        <li>Bulk pricing on cases for range days and training.</li>
+        <li>Knowledgeable support from real shooters — call or email us with any caliber question.</li>
+      </ul>
+    </div>
+  </section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/home.js' %}"></script>
+{% endblock %}

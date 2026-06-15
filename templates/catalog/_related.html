@@ -1,0 +1,22 @@
+{% if related %}
+<section class="related">
+  <div class="container">
+    <h2>You Might Also Like</h2>
+    <div class="related-grid">
+      {% for r in related %}
+        <a href="{{ r.get_absolute_url }}" class="related-card">
+          <div class="rimg{% if r.product_type == 'tackle' %} lure{% endif %}">{% if r.image %}<img src="{{ r.image.url }}" alt="{{ r.title }}" />{% else %}{{ r.caliber_label }}{% endif %}</div>
+          <h3>{{ r.title }}</h3>
+          <div class="rprice">${{ r.current_price }}</div>
+          {% if not site_config.catalog_mode %}
+          <form hx-post="{% url 'cart:add' %}" hx-target=".cart-count" hx-swap="innerHTML" onclick="event.stopPropagation();">
+            <input type="hidden" name="product_id" value="{{ r.id }}" />
+            <button class="btn btn-primary btn-block add-to-cart" type="submit">Add to Cart</button>
+          </form>
+          {% endif %}
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}

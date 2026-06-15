@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In or Create Account — TX Ballistics</title>
+  <meta name="description" content="Sign in to your TX Ballistics account or create one to track orders and get restock alerts. Must be 18+ (handgun ammo 21+)." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/signin.css" />
+</head>
+<body>
+
+  <!-- ===== TIER 1: Top Utility Bar ===== -->
+  <div class="utility-bar">
+    <div class="container utility-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-star">★</span>
+        <span class="logo-text">TX<strong>BALLISTICS</strong></span>
+      </a>
+      <ul class="trust-bullets">
+        <li><span class="check">✓</span> In Stock &amp; Ready</li>
+        <li><span class="check">✓</span> Local Pickup</li>
+        <li><span class="check">✓</span> $100 Guarantee</li>
+      </ul>
+      <div class="utility-actions">
+        <a href="signin.html" class="util-link account-link"><span class="util-ico">👤</span> Account</a>
+        <a href="cart.html" class="util-link cart-link"><span class="util-ico">🛒</span> Cart <span class="cart-count">0</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TIER 2: Primary Navigation ===== -->
+  <nav class="primary-nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-home" aria-label="Home">⌂</a>
+      <ul class="nav-links">
+        <li><a href="#">Handgun</a></li>
+        <li><a href="#">Rifle</a></li>
+        <li><a href="#">Shotgun</a></li>
+        <li><a href="#">Rimfire</a></li>
+        <li><a href="#">Bulk Ammo</a></li>
+        <li><a href="#" class="nav-special">Specials</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="#">FAQ</a></li>
+      </ul>
+      <form class="nav-search" onsubmit="return false;">
+        <input type="search" placeholder="Search by caliber, brand, grain…" aria-label="Search" />
+        <button type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+
+  <!-- ===== Auth ===== -->
+  <section class="section auth-section">
+    <div class="container auth-wrap">
+
+      <div class="auth-head">
+        <h1>Your Account</h1>
+        <p>Track orders, get pickup-ready alerts, and reorder your go-to loads in one tap.</p>
+      </div>
+
+      <!-- Tabs -->
+      <div class="auth-tabs">
+        <button class="auth-tab active" data-auth="signin">Sign In</button>
+        <button class="auth-tab" data-auth="register">Create Account</button>
+      </div>
+
+      <div class="auth-card">
+
+        <!-- SIGN IN -->
+        <form class="auth-form active" id="auth-signin" onsubmit="return false;">
+          <label class="field">
+            <span>Email</span>
+            <input type="email" autocomplete="email" placeholder="you@email.com" />
+          </label>
+          <label class="field">
+            <span>Password</span>
+            <input type="password" autocomplete="current-password" placeholder="••••••••" />
+          </label>
+          <div class="auth-row">
+            <label class="checkbox"><input type="checkbox" checked /> Keep me signed in</label>
+            <a href="#" class="auth-forgot">Forgot password?</a>
+          </div>
+          <a href="account.html" class="btn btn-primary btn-block">Sign In</a>
+        </form>
+
+        <!-- REGISTER -->
+        <form class="auth-form" id="auth-register" onsubmit="return false;">
+          <div class="field-grid">
+            <label class="field"><span>First name</span><input type="text" autocomplete="given-name" placeholder="Travis" /></label>
+            <label class="field"><span>Last name</span><input type="text" autocomplete="family-name" placeholder="Bishop" /></label>
+          </div>
+          <label class="field"><span>Email</span><input type="email" autocomplete="email" placeholder="you@email.com" /></label>
+          <label class="field"><span>Mobile phone</span><input type="tel" autocomplete="tel" placeholder="(512) 555-0142" /></label>
+          <div class="field-grid">
+            <label class="field"><span>Password</span><input type="password" autocomplete="new-password" placeholder="••••••••" /></label>
+            <label class="field"><span>Confirm password</span><input type="password" autocomplete="new-password" placeholder="••••••••" /></label>
+          </div>
+
+          <div class="age-gate">
+            <label class="checkbox"><input type="checkbox" /> I confirm I am at least 18 years old (21+ for handgun ammunition)</label>
+            <label class="checkbox"><input type="checkbox" /> I am not prohibited by law from purchasing ammunition, and I agree to the <a href="#">Terms</a> &amp; <a href="#">Privacy Policy</a></label>
+          </div>
+
+          <a href="account.html" class="btn btn-primary btn-block">Create Account</a>
+        </form>
+
+        <p class="auth-switch" id="auth-switch">
+          New to TX Ballistics? <button type="button" data-auth="register">Create an account →</button>
+        </p>
+      </div>
+
+      <!-- Guest -->
+      <div class="guest-card">
+        <div>
+          <strong>Just want to reserve some ammo?</strong>
+          <p>You can check out as a guest — no account needed. We'll still text you when it's ready.</p>
+        </div>
+        <a href="cart.html" class="btn btn-ghost btn-dark">Continue as Guest</a>
+      </div>
+
+      <p class="auth-legal">🪪 Valid government photo ID is required at pickup. You must meet all state and federal age requirements to purchase ammunition.</p>
+
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <a href="index.html" class="logo footer-logo">
+        <span class="logo-star">★</span>
+        <span class="logo-text">TX<strong>BALLISTICS</strong></span>
+      </a>
+      <ul class="footer-links">
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="#">Store &amp; Pickup</a></li>
+        <li><a href="#">Free Targets</a></li>
+        <li><a href="#">Terms &amp; Conditions</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Texas Gun Laws</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>© 2026 TX Ballistics, LLC · Central Texas · Must be 18+ (handgun ammo 21+) to purchase.</p>
+        <span class="bbb-badge">★ BBB Accredited</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/signin.js"></script>
+</body>
+</html>

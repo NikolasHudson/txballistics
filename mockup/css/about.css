@@ -1,0 +1,188 @@
+/* ===========================================================
+   TX Ballistics — About page styles
+   Builds on styles.css (shares header, nav, footer, buttons).
+   =========================================================== */
+
+/* ---------- Page hero ---------- */
+.about-hero {
+  background:
+    linear-gradient(rgba(22, 41, 30, 0.88), rgba(22, 41, 30, 0.94)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M0 39h40M39 0v40' stroke='%23ffffff' stroke-opacity='0.04' stroke-width='1'/%3E%3C/svg%3E"),
+    var(--green-dark);
+  color: #fff;
+  text-align: center;
+  padding: 70px 0;
+}
+.about-hero .eyebrow {
+  color: var(--khaki);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 14px;
+}
+.about-hero h1 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 56px;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.about-hero p {
+  max-width: 620px;
+  margin: 18px auto 0;
+  font-size: 19px;
+  color: #dfe6df;
+}
+
+/* ---------- Story (two-column) ---------- */
+.story { padding: 64px 0; }
+.story-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: center;
+}
+.story h2 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 34px;
+  text-transform: uppercase;
+  color: var(--green-dark);
+  margin-bottom: 18px;
+}
+.story p { color: #4a4a42; margin-bottom: 16px; font-size: 16px; }
+.story .signature {
+  font-family: 'Oswald', sans-serif;
+  font-size: 22px;
+  color: var(--orange);
+  margin-top: 8px;
+}
+.story-photo {
+  border-radius: 12px;
+  min-height: 360px;
+  background:
+    linear-gradient(135deg, rgba(31, 61, 43, 0.15), rgba(200, 85, 27, 0.12)),
+    repeating-linear-gradient(45deg, var(--sand), var(--sand) 16px, var(--stripe) 16px, var(--stripe) 32px);
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-family: 'Oswald', sans-serif;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ---------- Values ---------- */
+.values { background: #fff; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 60px 0; }
+.values h2 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 32px;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--green-dark);
+  margin-bottom: 36px;
+}
+.values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.value-card {
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--green);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  background: var(--sand);
+}
+.value-card .vnum {
+  font-family: 'Oswald', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--orange);
+  letter-spacing: 1px;
+}
+.value-card h3 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 22px;
+  text-transform: uppercase;
+  color: var(--green-dark);
+  margin: 8px 0 10px;
+}
+.value-card p { color: #5b5848; font-size: 15px; }
+
+/* ---------- Stats band ---------- */
+.stats { background: var(--green); color: #fff; padding: 40px 0; }
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; text-align: center; }
+.stat .num { font-family: 'Oswald', sans-serif; font-size: 44px; font-weight: 700; color: #fff; line-height: 1; }
+.stat .label { color: #cdd6cd; text-transform: uppercase; letter-spacing: 1px; font-size: 13px; margin-top: 8px; }
+
+/* ---------- Team ---------- */
+.team { padding: 64px 0; }
+.team h2 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 32px;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--green-dark);
+  margin-bottom: 36px;
+}
+.team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.member {
+  text-align: center;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 28px 22px;
+}
+.member .avatar {
+  width: 110px; height: 110px;
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  background: var(--green);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Oswald', sans-serif;
+  font-size: 38px;
+  font-weight: 700;
+  border: 4px solid var(--khaki);
+}
+.member h3 { font-family: 'Oswald', sans-serif; font-size: 21px; color: var(--green-dark); text-transform: uppercase; }
+.member .role { color: var(--orange); font-weight: 600; font-size: 14px; margin-bottom: 10px; }
+.member p { color: #5b5848; font-size: 14px; }
+
+/* ---------- Store / pickup ---------- */
+.store { background: var(--khaki); padding: 56px 0; }
+.store-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+.store h2 { font-family: 'Oswald', sans-serif; font-size: 32px; text-transform: uppercase; color: var(--green-dark); margin-bottom: 16px; }
+.store p { color: #4a4633; margin-bottom: 18px; }
+.store-info { list-style: none; }
+.store-info li { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.08); color: #3a382c; }
+.store-info .k { font-family: 'Oswald', sans-serif; font-weight: 600; text-transform: uppercase; color: var(--green-dark); min-width: 120px; }
+.store-map {
+  min-height: 300px;
+  border-radius: 12px;
+  border: 1px solid #c3b99c;
+  background:
+    repeating-linear-gradient(0deg, rgba(31,61,43,0.06), rgba(31,61,43,0.06) 1px, transparent 1px, transparent 28px),
+    repeating-linear-gradient(90deg, rgba(31,61,43,0.06), rgba(31,61,43,0.06) 1px, transparent 1px, transparent 28px),
+    #eef0e8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--green);
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ---------- CTA band ---------- */
+.about-cta { background: var(--green-dark); color: #fff; text-align: center; padding: 56px 0; }
+.about-cta h2 { font-family: 'Oswald', sans-serif; font-size: 34px; text-transform: uppercase; margin-bottom: 12px; }
+.about-cta p { color: #cdd6cd; margin-bottom: 24px; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .story-grid, .store-grid { grid-template-columns: 1fr; }
+  .values-grid, .team-grid { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; }
+  .about-hero h1 { font-size: 40px; }
+}

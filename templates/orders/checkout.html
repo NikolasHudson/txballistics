@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Checkout — TX Ballistics{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/checkout.css' %}" />{% endblock %}
+
+{% block body %}
+<nav class="checkout-nav">
+  <div class="container checkout-nav-inner">
+    <a href="{% url 'cart:detail' %}" class="back-link">← Back to cart</a>
+    <ol class="checkout-steps">
+      <li class="done"><span class="step-num">✓</span> Cart</li>
+      <li class="active"><span class="step-num">2</span> Checkout</li>
+      <li><span class="step-num">3</span> Confirmation</li>
+    </ol>
+    <span class="secure-note">🔒 Secure</span>
+  </div>
+</nav>
+
+<section class="section checkout-section">
+  <div class="container">
+    <h1 class="page-title">Checkout</h1>
+    <form class="checkout-layout" method="post" action="{% url 'orders:checkout' %}">
+      {% csrf_token %}
+      <div class="checkout-main">
+        {% if form.errors %}<div class="form-errors" style="color:var(--red);margin-bottom:12px;">Please correct the highlighted fields below.</div>{% endif %}
+
+        <!-- Contact -->
+        <fieldset class="co-block">
+          <legend><span class="co-step">1</span> Contact Information</legend>
+          <div class="field-grid">
+            <label class="field"><span>First name</span><input type="text" name="first_name" value="{{ form.first_name.value|default:'' }}" required /></label>
+            <label class="field"><span>Last name</span><input type="text" name="last_name" value="{{ form.last_name.value|default:'' }}" required /></label>
+            <label class="field"><span>Email</span><input type="email" name="email" value="{{ form.email.value|default:'' }}" required />{{ form.email.errors }}</label>
+            <label class="field"><span>Mobile phone</span><input type="tel" name="phone" value="{{ form.phone.value|default:'' }}" /></label>
+          </div>
+          <label class="checkbox"><input type="checkbox" name="notify_when_ready" checked /> Email me when my order is ready</label>
+        </fieldset>
+
+        {% if needs_shipping %}
+        <!-- Shipping -->
+        <fieldset class="co-block">
+          <legend><span class="co-step">2</span> Shipping Address</legend>
+          <p class="co-note">Your tackle items will ship to this address.</p>
+          <label class="field"><span>Street</span><input type="text" name="ship_street" value="{{ form.ship_street.value|default:'' }}" />{{ form.ship_street.errors }}</label>
+          <div class="field-grid">
+            <label class="field"><span>City</span><input type="text" name="ship_city" value="{{ form.ship_city.value|default:'' }}" />{{ form.ship_city.errors }}</label>
+            <label class="field"><span>State</span><input type="text" name="ship_state" maxlength="2" value="{{ form.ship_state.value|default:'' }}" />{{ form.ship_state.errors }}</label>
+            <label class="field"><span>ZIP</span><input type="text" name="ship_zip" value="{{ form.ship_zip.value|default:'' }}" />{{ form.ship_zip.errors }}</label>
+          </div>
+        </fieldset>
+        {% endif %}
+
+        <fieldset class="co-block">
+          <legend><span class="co-step">{% if needs_shipping %}3{% else %}2{% endif %}</span> Pickup</legend>
+          <p class="co-note">Ammo is reserved for in-person pickup. We'll email your pickup address and let you know when it's bagged and ready — usually same day. Bring a valid photo ID; the name on your ID must match the name on the card used to order.</p>
+        </fieldset>
+
+        {% if needs_age %}
+        <!-- Age / attestation -->
+        <fieldset class="co-block">
+          <legend><span class="co-step">{% if needs_shipping %}4{% else %}3{% endif %}</span> Age Verification</legend>
+          <p class="co-note">Texas &amp; federal law require a valid government photo ID at pickup. Rifle/shotgun ammo 18+, handgun ammo 21+.</p>
+          <label class="checkbox"><input type="checkbox" name="age_attest" /> I confirm I am of legal age and will present valid photo ID at pickup</label>
+          {{ form.age_attest.errors }}
+          <label class="checkbox"><input type="checkbox" name="not_prohibited_attest" /> I am not prohibited by law from purchasing ammunition</label>
+          {{ form.not_prohibited_attest.errors }}
+        </fieldset>
+        {% endif %}
+
+        <!-- Payment -->
+        <fieldset class="co-block">
+          <legend><span class="co-step">{% if needs_age and needs_shipping %}5{% elif needs_age or needs_shipping %}4{% else %}3{% endif %}</span> Payment</legend>
+          <label class="pay-option selected">
+            <input type="radio" name="payment_method" value="pay_at_pickup" checked />
+            <span class="pay-info"><strong>Pay at pickup</strong><span>Reserve now, pay with card or cash at the counter.</span></span>
+          </label>
+        </fieldset>
+
+        <p class="co-fineprint">By placing this order you agree to our Terms &amp; Conditions and confirm your order will be cancelled if ID requirements are not met at pickup.</p>
+      </div>
+
+      <aside class="checkout-summary">
+        <h2>Order Summary</h2>
+        <ul class="cs-items">
+          {% for item in cart.items_list %}
+          <li>
+            <span class="cs-thumb">{{ item.product.caliber_label }}</span>
+            <span class="cs-meta"><strong>{{ item.product.title }}</strong>{% if item.variant %}<span>{{ item.variant.name }}</span>{% endif %}<span class="cs-qty">Qty {{ item.quantity }}</span></span>
+            <span class="cs-price">${{ item.line_total }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+        <div class="cs-row"><span>Subtotal</span><span>${{ totals.subtotal }}</span></div>
+        {% if totals.discount %}<div class="cs-row"><span>Discount</span><span>−${{ totals.discount }}</span></div>{% endif %}
+        {% if totals.has_pickup %}<div class="cs-row"><span>Local pickup</span><span class="os-free">FREE</span></div>{% endif %}
+        {% if totals.has_ship %}<div class="cs-row"><span>Shipping</span><span>{% if totals.shipping %}${{ totals.shipping }}{% else %}<span class="os-free">FREE</span>{% endif %}</span></div>{% endif %}
+        <div class="cs-row cs-muted"><span>Estimated tax</span><span>${{ totals.tax }}</span></div>
+        <div class="cs-row cs-total"><span>Total</span><span>${{ totals.total }}</span></div>
+        <button class="btn btn-primary btn-block cs-place" type="submit">Place Order</button>
+        <p class="cs-secure">🔒 Your information is secure</p>
+      </aside>
+    </form>
+  </div>
+</section>
+{% endblock %}

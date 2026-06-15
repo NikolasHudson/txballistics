@@ -1,0 +1,190 @@
+/* ===========================================================
+   TX Ballistics — Category / Listing page styles
+   Builds on styles.css (shares header, nav, footer, buttons).
+   =========================================================== */
+
+/* ---------- Breadcrumb ---------- */
+.breadcrumb {
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+  color: var(--muted);
+}
+.breadcrumb .container { padding-top: 12px; padding-bottom: 12px; }
+.breadcrumb a { color: var(--green); font-weight: 500; }
+.breadcrumb a:hover { text-decoration: underline; }
+.breadcrumb .sep { margin: 0 8px; color: #b9b3a2; }
+.breadcrumb .current { color: var(--ink); font-weight: 600; }
+
+/* ---------- Two-column layout ---------- */
+.cat-layout {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 28px;
+  padding: 28px 0 56px;
+  align-items: start;
+}
+
+/* ---------- Left sidebar ---------- */
+.cat-sidebar { position: sticky; top: 64px; }
+.side-block { margin-bottom: 22px; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: #fff; }
+.side-head {
+  background: var(--green);
+  color: #fff;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  padding: 11px 16px;
+}
+.side-list { list-style: none; }
+.side-list li + li { border-top: 1px solid var(--line); }
+.side-list a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  font-size: 14px;
+  color: var(--ink);
+}
+.side-list a::after { content: "›"; color: #c1bba9; font-size: 18px; line-height: 1; }
+.side-list a:hover { background: var(--sand); }
+.side-list a:hover::after { color: var(--orange); }
+.side-list li.active a { background: var(--sand); color: var(--green-dark); font-weight: 700; border-left: 4px solid var(--orange); }
+.side-list .count { color: var(--muted); font-size: 12px; font-weight: 400; margin-left: auto; margin-right: 10px; }
+
+/* Filter widget (simple checkboxes) */
+.filter-group { padding: 12px 16px; }
+.filter-group h4 { font-size: 13px; text-transform: uppercase; color: var(--green-dark); margin-bottom: 8px; letter-spacing: 0.5px; }
+.filter-group label { display: flex; align-items: center; gap: 8px; font-size: 13px; padding: 4px 0; color: var(--ink); cursor: pointer; }
+.filter-group label .fcount { color: var(--muted); margin-left: auto; }
+.filter-group + .filter-group { border-top: 1px solid var(--line); }
+
+/* ---------- Main listing header ---------- */
+.cat-main h1 { font-family: 'Oswald', sans-serif; font-size: 34px; text-transform: uppercase; color: var(--green-dark); }
+.cat-intro { color: var(--muted); margin: 6px 0 18px; max-width: 720px; }
+
+.listing-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  margin-bottom: 20px;
+}
+.result-count { font-weight: 600; color: var(--green-dark); }
+.result-count strong { color: var(--orange); }
+.toolbar-right { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.toolbar-right label { font-size: 13px; color: var(--muted); }
+.toolbar-right select {
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  font-size: 14px;
+  background: #fff;
+  cursor: pointer;
+}
+
+/* View toggle (links between the two variations) */
+.view-toggle { display: inline-flex; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.view-toggle a {
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--green-dark);
+  background: #fff;
+}
+.view-toggle a + a { border-left: 1px solid var(--line); }
+.view-toggle a.active { background: var(--green); color: #fff; }
+.view-toggle a:hover:not(.active) { background: var(--sand); }
+
+/* ===========================================================
+   VARIATION A — Card list (reuses .product-card from styles.css)
+   =========================================================== */
+.cat-cards { display: grid; gap: 16px; }
+
+/* ===========================================================
+   VARIATION B — Spreadsheet / table view
+   =========================================================== */
+.ammo-table-wrap { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.ammo-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.ammo-table thead th {
+  background: var(--green);
+  color: #fff;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 12px;
+  text-align: left;
+  padding: 11px 14px;
+  white-space: nowrap;
+}
+.ammo-table thead th.num, .ammo-table tbody td.num { text-align: right; }
+.ammo-table thead th.center, .ammo-table tbody td.center { text-align: center; }
+.ammo-table tbody tr { border-top: 1px solid var(--line); transition: background 0.1s ease; }
+.ammo-table tbody tr:nth-child(even) { background: #f6f7f9; }
+.ammo-table tbody tr:hover { background: #e9ebef; }
+.ammo-table td { padding: 12px 14px; vertical-align: middle; }
+
+.tcell-product { display: flex; align-items: center; gap: 12px; min-width: 240px; }
+.tcell-thumb {
+  width: 46px; height: 46px; flex: none;
+  border-radius: 5px;
+  background: repeating-linear-gradient(45deg, var(--sand), var(--sand) 6px, var(--stripe) 6px, var(--stripe) 12px);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 13px; color: var(--green);
+}
+.tcell-title { font-weight: 600; color: var(--green-dark); line-height: 1.25; }
+.tcell-title:hover { color: var(--orange); cursor: pointer; }
+.tcell-title .tested-inline { color: var(--orange); font-size: 11px; font-weight: 700; letter-spacing: 0.5px; }
+
+.t-price { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 18px; color: var(--ink); white-space: nowrap; }
+.t-price.sale { color: var(--red); }
+.t-was { display: block; font-size: 12px; color: var(--muted); text-decoration: line-through; font-family: 'Inter', sans-serif; font-weight: 400; }
+.t-cpr { color: var(--muted); white-space: nowrap; }
+
+/* Stock / quantity cell on the far right */
+.t-stock { font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 15px; color: var(--green-light); white-space: nowrap; }
+.t-stock.low { color: var(--orange); }
+.t-stock.out { color: var(--muted); }
+
+.t-buy { padding: 7px 14px; font-size: 13px; }
+.t-buy[disabled] { background: #c9c4b5; cursor: not-allowed; }
+
+/* ---------- Bottom toolbar / pagination ---------- */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 24px;
+}
+.pagination a, .pagination span {
+  min-width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--green-dark);
+}
+.pagination a:hover { background: var(--sand); }
+.pagination .current { background: var(--green); color: #fff; border-color: var(--green); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .cat-layout { grid-template-columns: 1fr; }
+  .cat-sidebar { position: static; }
+  .ammo-table-wrap { overflow-x: auto; }
+}

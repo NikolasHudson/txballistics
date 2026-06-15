@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Your Cart — TX Ballistics{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/cart.css' %}" />{% endblock %}
+
+{% block body %}
+  <div class="breadcrumb">
+    <div class="container">
+      <a href="{% url 'core:home' %}">Home</a><span class="sep">›</span>
+      <span class="current">Your Cart</span>
+    </div>
+  </div>
+
+  <section class="section cart-section">
+    <div class="container">
+      <div class="page-head">
+        <h1>Your Cart</h1>
+        <p><span id="cart-item-count">{{ totals.count }}</span> item{{ totals.count|pluralize }} reserved for pickup</p>
+      </div>
+
+      <div id="cart-wrapper">
+        {% include "cart/_cart_body.html" %}
+      </div>
+    </div>
+  </section>
+{% endblock %}

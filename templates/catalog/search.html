@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Search — TX Ballistics{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/category.css' %}" />{% endblock %}
+
+{% block body %}
+  <div class="breadcrumb">
+    <div class="container">
+      <a href="{% url 'core:home' %}">Home</a><span class="sep">›</span>
+      <span class="current">Search</span>
+    </div>
+  </div>
+
+  <div class="container" style="padding:24px 0;">
+    <main class="cat-main">
+      <h1>Search results</h1>
+      <p class="cat-intro">{% if q %}{{ total }} result{{ total|pluralize }} for "{{ q }}"{% else %}Type a caliber, brand, or product name in the search bar above.{% endif %}</p>
+
+      {% if q %}
+      <div class="ammo-table-wrap">
+        <table class="ammo-table">
+          <thead>
+            <tr>
+              <th>Product</th><th>Brand</th><th>Bullet</th><th class="num">Grain</th>
+              <th>Casing</th><th class="num">Rounds</th><th class="num">Cost/Rd</th><th class="num">Price</th>
+              {% if site_config.show_stock %}<th class="num">Quantity</th>{% endif %}
+              {% if not site_config.catalog_mode %}<th class="center">Buy</th>{% endif %}
+            </tr>
+          </thead>
+          <tbody>
+            {% for p in products %}{% include "partials/_product_row.html" %}{% empty %}
+              <tr><td colspan="10" style="text-align:center;padding:30px;">No matches. Try another term.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% endif %}
+    </main>
+  </div>
+{% endblock %}

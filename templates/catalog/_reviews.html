@@ -1,0 +1,47 @@
+{% load catalog_extras %}
+{% if site_config.reviews_enabled %}
+<section class="detail-section{% if product.specs.all %} alt{% endif %}" id="reviews">
+  <div class="container">
+    <h2>Customer Reviews</h2>
+    <div class="reviews-summary">
+      <div class="reviews-score">
+        <div class="big">{{ product.avg_rating|floatformat:1 }}</div>
+        <div class="stars">{{ product.avg_rating|stars }}</div>
+        <div class="count">{{ product.review_count }} reviews</div>
+      </div>
+    </div>
+
+    {% for r in reviews %}
+      <div class="review">
+        <div class="head">
+          <span class="who">{{ r.display_name }}{% if r.is_verified %} <span class="verified">✓ Verified</span>{% endif %}</span>
+          <span class="stars">{{ r.stars }}</span>
+        </div>
+        <p>{{ r.body }}</p>
+        <span class="date">{{ r.created_at|date:"F Y" }}</span>
+      </div>
+    {% empty %}
+      <p class="no-reviews">No reviews yet — be the first.</p>
+    {% endfor %}
+
+    <form class="review-form" method="post" action="{% url 'reviews:create' product.slug %}">
+      {% csrf_token %}
+      <h3 class="review-form-title">Write a Review</h3>
+      {% if not user.is_authenticated %}
+        <label class="rf-field"><span>Your name</span><input type="text" name="display_name" placeholder="Travis B." /></label>
+      {% endif %}
+      <label class="rf-field"><span>Rating</span>
+        <select name="rating">
+          <option value="5">★★★★★ — Excellent</option>
+          <option value="4">★★★★ — Good</option>
+          <option value="3">★★★ — Okay</option>
+          <option value="2">★★ — Poor</option>
+          <option value="1">★ — Bad</option>
+        </select>
+      </label>
+      <label class="rf-field"><span>Review</span><textarea name="body" rows="4" placeholder="How did it shoot?"></textarea></label>
+      <button class="btn btn-primary" type="submit">Submit Review</button>
+    </form>
+  </div>
+</section>
+{% endif %}

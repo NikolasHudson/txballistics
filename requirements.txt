@@ -1,0 +1,9 @@
+Django>=5.0,<5.2
+django-unfold
+django-environ
+django-htmx
+django-solo
+Pillow
+psycopg[binary]
+gunicorn
+whitenoise

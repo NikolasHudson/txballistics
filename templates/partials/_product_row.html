@@ -1,0 +1,33 @@
+{% load catalog_extras %}
+<tr>
+  <td>
+    <div class="tcell-product">
+      <a href="{{ p.get_absolute_url }}" class="tcell-thumb">{% if p.image %}<img src="{{ p.image.url }}" alt="{{ p.title }}" />{% else %}{{ p.caliber_label }}{% endif %}</a>
+      <a class="tcell-title" href="{{ p.get_absolute_url }}">{{ p.title }}</a>
+    </div>
+  </td>
+  <td>{% if p.manufacturer %}{{ p.manufacturer.short_name|default:p.manufacturer.name }}{% else %}—{% endif %}</td>
+  <td>{{ p.bullet_type|default:"—" }}</td>
+  <td class="num">{% if p.grain %}{{ p.grain }} gr{% else %}—{% endif %}</td>
+  <td>{{ p.casing|default:"—" }}</td>
+  <td class="num">{% if p.rounds_per_unit %}{{ p.rounds_per_unit }}{% else %}—{% endif %}</td>
+  <td class="num t-cpr">{{ p.cost_per_round_cents|default:"—" }}</td>
+  <td class="num">
+    {% if p.is_on_sale %}
+      <span class="t-was">${{ p.price }}</span><span class="t-price sale">${{ p.sale_price }}</span>
+    {% else %}
+      <span class="t-price">${{ p.price }}</span>
+    {% endif %}
+  </td>
+  {% if site_config.show_stock %}
+    <td class="num"><span class="t-stock {{ p.stock_status }}">{% if p.stock_status == 'out' %}Out of Stock{% else %}{{ p.total_stock }} in stock{% endif %}</span></td>
+  {% endif %}
+  {% if not site_config.catalog_mode %}
+  <td class="center">
+    <form hx-post="{% url 'cart:add' %}" hx-target=".cart-count" hx-swap="innerHTML">
+      <input type="hidden" name="product_id" value="{{ p.id }}" />
+      <button class="btn btn-primary t-buy add-to-cart" type="submit">Add</button>
+    </form>
+  </td>
+  {% endif %}
+</tr>

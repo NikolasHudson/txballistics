@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ category.name }} — TX Ballistics{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/category.css' %}" />{% endblock %}
+
+{% block body %}
+  <div class="breadcrumb">
+    <div class="container">
+      <a href="{% url 'core:home' %}">Home</a><span class="sep">›</span>
+      {% if category.parent %}<a href="{{ category.parent.get_absolute_url }}">{{ category.parent.name }}</a><span class="sep">›</span>{% endif %}
+      <span class="current">{{ category.name }}</span>
+    </div>
+  </div>
+
+  <div class="container cat-layout">
+    <!-- Left sidebar -->
+    <aside class="cat-sidebar">
+      <div class="side-block">
+        <div class="side-head">{{ parent_title }}</div>
+        <ul class="side-list">
+          {% for s in siblings %}
+            <li{% if s.id == category.id %} class="active"{% endif %}><a href="{{ s.get_absolute_url }}">{{ s.name }} <span class="count">{{ s.products.count }}</span></a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="side-block">
+        <div class="side-head">More Categories</div>
+        <ul class="side-list">
+          {% for c in other_top %}
+            <li><a href="{{ c.get_absolute_url }}">{{ c.name }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Main listing -->
+    <main class="cat-main">
+      <h1>{{ category.name }}</h1>
+      {% if category.blurb %}<p class="cat-intro">{{ category.blurb }}</p>{% endif %}
+
+      <div class="listing-toolbar">
+        <span class="result-count">Showing <strong>{{ products|length }}</strong> of {{ total }}{% if site_config.show_stock %} in stock{% endif %}</span>
+        <div class="toolbar-right">
+          <form method="get" id="sort-form">
+            <label>Sort:
+              <select name="sort" onchange="document.getElementById('sort-form').submit()">
+                {% for key, conf in sorts.items %}
+                  <option value="{{ key }}"{% if key == current_sort %} selected{% endif %}>{{ conf.0 }}</option>
+                {% endfor %}
+              </select>
+            </label>
+          </form>
+        </div>
+      </div>
+
+      <div class="ammo-table-wrap">
+        <table class="ammo-table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Brand</th>
+              <th>Bullet</th>
+              <th class="num">Grain</th>
+              <th>Casing</th>
+              <th class="num">Rounds</th>
+              <th class="num">Cost/Rd</th>
+              <th class="num">Price</th>
+              {% if site_config.show_stock %}<th class="num">Quantity</th>{% endif %}
+              {% if not site_config.catalog_mode %}<th class="center">Buy</th>{% endif %}
+            </tr>
+          </thead>
+          <tbody>
+            {% for p in products %}{% include "partials/_product_row.html" %}{% empty %}
+              <tr><td colspan="10" style="text-align:center;padding:30px;">No products in this category yet.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      {% if products.paginator.num_pages > 1 %}
+      <div class="pagination">
+        {% if products.has_previous %}<a href="?sort={{ current_sort }}&page={{ products.previous_page_number }}">‹ Prev</a>{% endif %}
+        {% for n in products.paginator.page_range %}
+          {% if n == products.number %}<span class="current">{{ n }}</span>{% else %}<a href="?sort={{ current_sort }}&page={{ n }}">{{ n }}</a>{% endif %}
+        {% endfor %}
+        {% if products.has_next %}<a href="?sort={{ current_sort }}&page={{ products.next_page_number }}">Next ›</a>{% endif %}
+      </div>
+      {% endif %}
+
+      {% if category.quick_facts_list %}
+      <section class="quick-facts" style="margin-top:30px;">
+        <h2>Quick Facts</h2>
+        <ul>{% for f in category.quick_facts_list %}<li>{{ f }}</li>{% endfor %}</ul>
+      </section>
+      {% endif %}
+    </main>
+  </div>
+{% endblock %}

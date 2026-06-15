@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Sign In or Create Account — TX Ballistics{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/signin.css' %}" />{% endblock %}
+
+{% block body %}
+<section class="section auth-section">
+  <div class="container auth-wrap">
+    <div class="auth-head">
+      <h1>Your Account</h1>
+      <p>Track orders, get pickup-ready alerts, and reorder your go-to loads in one tap.</p>
+    </div>
+
+    <div class="auth-tabs">
+      <button class="auth-tab {% if active_tab != 'register' %}active{% endif %}" data-auth="signin">Sign In</button>
+      <button class="auth-tab {% if active_tab == 'register' %}active{% endif %}" data-auth="register">Create Account</button>
+    </div>
+
+    <div class="auth-card">
+      <!-- SIGN IN -->
+      <form class="auth-form {% if active_tab != 'register' %}active{% endif %}" id="auth-signin" method="post" action="{% url 'accounts:login' %}">
+        {% csrf_token %}
+        {% if login_form.non_field_errors %}<div class="form-errors">{{ login_form.non_field_errors }}</div>{% endif %}
+        <label class="field"><span>Email</span><input type="email" name="username" autocomplete="email" placeholder="you@email.com" required /></label>
+        <label class="field"><span>Password</span><input type="password" name="password" autocomplete="current-password" placeholder="••••••••" required /></label>
+        <div class="auth-row">
+          <label class="checkbox"><input type="checkbox" name="remember" checked /> Keep me signed in</label>
+          <a href="#" class="auth-forgot">Forgot password?</a>
+        </div>
+        <button class="btn btn-primary btn-block" type="submit">Sign In</button>
+      </form>
+
+      <!-- REGISTER -->
+      <form class="auth-form {% if active_tab == 'register' %}active{% endif %}" id="auth-register" method="post" action="{% url 'accounts:register' %}">
+        {% csrf_token %}
+        {% if register_form.errors %}<div class="form-errors">Please correct the errors below.</div>{% endif %}
+        <div class="field-grid">
+          <label class="field"><span>First name</span><input type="text" name="first_name" value="{{ register_form.first_name.value|default:'' }}" placeholder="Travis" /></label>
+          <label class="field"><span>Last name</span><input type="text" name="last_name" value="{{ register_form.last_name.value|default:'' }}" placeholder="Bishop" /></label>
+        </div>
+        <label class="field"><span>Email</span><input type="email" name="email" value="{{ register_form.email.value|default:'' }}" placeholder="you@email.com" required />{{ register_form.email.errors }}</label>
+        <label class="field"><span>Mobile phone</span><input type="tel" name="phone" value="{{ register_form.phone.value|default:'' }}" placeholder="(512) 555-0142" /></label>
+        <div class="field-grid">
+          <label class="field"><span>Password</span><input type="password" name="password1" placeholder="••••••••" required /></label>
+          <label class="field"><span>Confirm password</span><input type="password" name="password2" placeholder="••••••••" required />{{ register_form.password2.errors }}</label>
+        </div>
+        <div class="age-gate">
+          <label class="checkbox"><input type="checkbox" name="age_attest" /> I confirm I am at least 18 years old (21+ for handgun ammunition)</label>
+          <label class="checkbox"><input type="checkbox" name="terms_attest" /> I am not prohibited by law from purchasing ammunition, and I agree to the Terms &amp; Privacy Policy</label>
+        </div>
+        <button class="btn btn-primary btn-block" type="submit">Create Account</button>
+      </form>
+    </div>
+
+    <div class="guest-card">
+      <div>
+        <strong>Just want to reserve some ammo?</strong>
+        <p>You can check out as a guest — no account needed. We'll still email you when it's ready.</p>
+      </div>
+      <a href="{% url 'cart:detail' %}" class="btn btn-ghost btn-dark">Continue as Guest</a>
+    </div>
+
+    <p class="auth-legal">🪪 Valid government photo ID is required at pickup, with a matching name on the card used to order.</p>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}<script src="{% static 'js/signin.js' %}"></script>{% endblock %}

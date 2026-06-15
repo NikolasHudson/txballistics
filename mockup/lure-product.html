@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hill Country Squarebill Crankbait — 2.5" — Lone Star Lures | TX Ballistics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/product.css" />
+  <link rel="stylesheet" href="css/lure-product.css" />
+</head>
+<body>
+
+  <!-- ===== TIER 1: Top Utility Bar ===== -->
+  <div class="utility-bar">
+    <div class="container utility-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-star">★</span>
+        <span class="logo-text">TX<strong>BALLISTICS</strong></span>
+      </a>
+      <ul class="trust-bullets">
+        <li><span class="check">✓</span> In Stock &amp; Ready</li>
+        <li><span class="check">✓</span> Fast Texas Shipping</li>
+        <li><span class="check">✓</span> $100 Guarantee</li>
+      </ul>
+      <div class="utility-actions">
+        <a href="signin.html" class="util-link account-link"><span class="util-ico">👤</span> Account</a>
+        <a href="cart.html" class="util-link cart-link"><span class="util-ico">🛒</span> Cart <span class="cart-count">0</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TIER 2: Primary Navigation ===== -->
+  <nav class="primary-nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-home" aria-label="Home">⌂</a>
+      <ul class="nav-links">
+        <li><a href="#">Handgun</a></li>
+        <li><a href="#">Rifle</a></li>
+        <li><a href="#">Shotgun</a></li>
+        <li><a href="#">Rimfire</a></li>
+        <li><a href="lure-product.html" class="nav-fishing">Fishing</a></li>
+        <li><a href="#" class="nav-special">Specials</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="#">FAQ</a></li>
+      </ul>
+      <form class="nav-search" onsubmit="return false;">
+        <input type="search" placeholder="Search lures, line, tackle…" aria-label="Search" />
+        <button type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+
+  <!-- ===== Breadcrumb ===== -->
+  <div class="breadcrumb">
+    <div class="container">
+      <a href="index.html">Home</a><span class="sep">›</span>
+      <a href="#">Fishing</a><span class="sep">›</span>
+      <a href="#">Crankbaits</a><span class="sep">›</span>
+      <span class="current">Hill Country Squarebill 2.5"</span>
+    </div>
+  </div>
+
+  <!-- ===== Top: gallery + buy box ===== -->
+  <section class="product-top">
+    <div class="container product-grid">
+
+      <!-- Gallery -->
+      <div class="gallery">
+        <div class="gallery-main lure-main">
+          <span class="tested-badge water">✓ TANK TESTED</span>
+          <span id="gallery-main-label">🎣</span>
+          <span class="video-link">▶ Watch the dive-action demo</span>
+        </div>
+        <div class="gallery-thumbs">
+          <button class="active" data-label="🎣">SIDE</button>
+          <button data-label="🐟">BELLY</button>
+          <button data-label="🪝">HOOKS</button>
+          <button data-label="🌊">ACTION</button>
+        </div>
+      </div>
+
+      <!-- Buy box -->
+      <div class="buy-box">
+        <h1>Hill Country Squarebill Crankbait — 2.5" — Lone Star Lures</h1>
+
+        <div class="buy-meta">
+          <span class="buy-rating">★★★★★ <a href="#reviews">(238 reviews)</a></span>
+          <span class="in-stock-pill water">132 IN STOCK</span>
+          <span class="buy-sku">SKU: LSL-SQB-25</span>
+        </div>
+
+        <div class="price-row">
+          <span class="price-now">$8.99</span>
+          <span class="price-was">$11.99</span>
+          <span class="price-save">Save $3.00</span>
+        </div>
+        <span class="cpr-pill">3 for $24 — mix &amp; match colors</span>
+
+        <!-- Color / pattern picker -->
+        <div class="swatch-block">
+          <div class="swatch-label">Color: <span id="swatch-name">Chartreuse Shad</span></div>
+          <div class="swatches" id="swatches">
+            <button class="swatch active" data-name="Chartreuse Shad" style="--sw1:#d8e23a;--sw2:#3a7d44" title="Chartreuse Shad"></button>
+            <button class="swatch" data-name="Texas Craw" style="--sw1:#8a3b1e;--sw2:#c8551b" title="Texas Craw"></button>
+            <button class="swatch" data-name="Bluegill" style="--sw1:#2c6e8f;--sw2:#7fae3a" title="Bluegill"></button>
+            <button class="swatch" data-name="Sexy Shad" style="--sw1:#cfd6da;--sw2:#3b5d8a" title="Sexy Shad"></button>
+            <button class="swatch" data-name="Black/Chrome" style="--sw1:#cfd2d4;--sw2:#1c1c1a" title="Black / Chrome"></button>
+          </div>
+        </div>
+
+        <div class="buy-actions">
+          <div class="qty-stepper">
+            <button id="qty-minus" aria-label="Decrease quantity">−</button>
+            <input id="qty" type="text" inputmode="numeric" value="1" aria-label="Quantity" />
+            <button id="qty-plus" aria-label="Increase quantity">+</button>
+          </div>
+          <button class="btn btn-primary add-to-cart" id="main-add">Add to Cart — <span id="buy-total">$8.99</span></button>
+        </div>
+        <p class="ship-note"><span id="buy-qty">1 lure</span> · Ships next business day · Free shipping on tackle orders $35+</p>
+
+        <ul class="buy-reassure">
+          <li><span class="ico">✓</span> In stock now — ships from our Central Texas warehouse</li>
+          <li><span class="ico">✓</span> Backed by our $100 satisfaction guarantee</li>
+          <li><span class="ico">✓</span> Premium VMC round-bend trebles, factory-tuned to run true</li>
+          <li><span class="ico">✓</span> Hand-picked colors proven on Texas reservoirs</li>
+        </ul>
+
+        <div class="quick-specs">
+          <div><span class="k">Type</span><span class="v">Squarebill Crankbait</span></div>
+          <div><span class="k">Length</span><span class="v">2.5 in</span></div>
+          <div><span class="k">Weight</span><span class="v">1/2 oz</span></div>
+          <div><span class="k">Dive Depth</span><span class="v">2–5 ft</span></div>
+          <div><span class="k">Hooks</span><span class="v">2× #4 trebles</span></div>
+          <div><span class="k">Buoyancy</span><span class="v">Floating</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Description ===== -->
+  <section class="detail-section alt">
+    <div class="container">
+      <h2>Description</h2>
+      <p>The Hill Country Squarebill is built for one thing: deflecting off rock, laydowns, and dock pilings to trigger reaction strikes from shallow Texas bass. Its wide, hunting wobble and silent-rattle balsa-style body make it a go-to from Falcon to Fork.</p>
+      <p>The square lip lets you crash it into cover and pop it free without hanging up, and the factory-tuned line tie means it runs true straight out of the box — no need to bend an eyelet on the water.</p>
+      <ul class="facts">
+        <li>Square lip deflects off cover to trigger reaction strikes</li>
+        <li>Wide hunting action that calls fish from a distance in stained water</li>
+        <li>Internal rattle chamber for extra fish-calling vibration</li>
+        <li>Factory-tuned to swim true — castable right out of the package</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== Specifications ===== -->
+  <section class="detail-section">
+    <div class="container">
+      <h2>Specifications</h2>
+      <table class="spec-table">
+        <tr><td class="k">Lure Type</td><td>Squarebill Crankbait (shallow)</td></tr>
+        <tr><td class="k">Length</td><td>2.5 in (64 mm)</td></tr>
+        <tr><td class="k">Weight</td><td>1/2 oz (14 g)</td></tr>
+        <tr><td class="k">Dive Depth</td><td>2–5 ft</td></tr>
+        <tr><td class="k">Buoyancy</td><td>Floating / slow-rise at rest</td></tr>
+        <tr><td class="k">Hooks</td><td>2 × #4 VMC round-bend trebles</td></tr>
+        <tr><td class="k">Split Rings</td><td>Stainless, #2</td></tr>
+        <tr><td class="k">Body</td><td>ABS hard body with internal rattle</td></tr>
+        <tr><td class="k">Best Line</td><td>10–14 lb fluorocarbon</td></tr>
+        <tr><td class="k">Target Species</td><td>Largemouth, smallmouth, spotted bass</td></tr>
+        <tr><td class="k">Manufacturer</td><td>Lone Star Lures (TX Ballistics house brand)</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ===== On-the-Water Test Data ===== -->
+  <section class="detail-section alt">
+    <div class="container">
+      <h2>🎣 Our On-the-Water Test</h2>
+      <p>We threw this bait on 12 lb fluoro behind a 6'10" medium-heavy rod and logged the action. Here's what it actually did — not just the package claim.</p>
+      <div class="testdata-grid">
+        <div class="testdata water"><div class="num">4.2 ft</div><div class="label">Measured Dive Depth</div></div>
+        <div class="testdata water"><div class="num">38"</div><div class="label">Avg Cast (½oz)</div></div>
+        <div class="testdata water"><div class="num">True</div><div class="label">Tracks Out of Box</div></div>
+        <div class="testdata water"><div class="num">9/10</div><div class="label">Cover Deflection</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Reviews ===== -->
+  <section class="detail-section" id="reviews">
+    <div class="container">
+      <h2>Customer Reviews</h2>
+      <div class="reviews-summary">
+        <div class="reviews-score">
+          <div class="big">4.8</div>
+          <div class="stars">★★★★★</div>
+          <div class="count">238 reviews</div>
+        </div>
+        <a href="#" class="btn btn-primary">Write a Review</a>
+      </div>
+
+      <div class="review">
+        <div class="head">
+          <span class="who">Cody W. <span class="verified">✓ Verified Buyer</span></span>
+          <span class="stars">★★★★★</span>
+        </div>
+        <p>Threw the Texas Craw color around laydowns on Lake Fork and smoked them. Deflects off wood without burying the hooks. Ran true right out of the pack.</p>
+        <span class="date">April 2026</span>
+      </div>
+
+      <div class="review">
+        <div class="head">
+          <span class="who">Marisol G. <span class="verified">✓ Verified Buyer</span></span>
+          <span class="stars">★★★★★</span>
+        </div>
+        <p>Bluegill pattern is deadly in the spring. Casts a mile for a squarebill and the rattle definitely calls them in dirty water. Bought three more.</p>
+        <span class="date">March 2026</span>
+      </div>
+
+      <div class="review">
+        <div class="head">
+          <span class="who">Bubba T. <span class="verified">✓ Verified Buyer</span></span>
+          <span class="stars">★★★★☆</span>
+        </div>
+        <p>Good action and great price. Swapped the rear hook for a feathered treble and it's perfect. Hooks are decent but I upgrade on every crankbait anyway.</p>
+        <span class="date">February 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Related ===== -->
+  <section class="related">
+    <div class="container">
+      <h2>You Might Also Like</h2>
+      <div class="related-grid">
+        <a href="lure-product.html" class="related-card">
+          <div class="rimg lure">🪱</div>
+          <h3>Lone Star Soft Plastic Worm — 7" — 8 pack</h3>
+          <div class="rprice">$5.49</div>
+          <span class="btn btn-primary btn-block add-to-cart">Add to Cart</span>
+        </a>
+        <a href="lure-product.html" class="related-card">
+          <div class="rimg lure">🌊</div>
+          <h3>Topwater Walking Bait — 4.5" — Bone</h3>
+          <div class="rprice">$10.99</div>
+          <span class="btn btn-primary btn-block add-to-cart">Add to Cart</span>
+        </a>
+        <a href="lure-product.html" class="related-card">
+          <div class="rimg lure">🥄</div>
+          <h3>Texas Spinnerbait — 3/8 oz — Chartreuse/White</h3>
+          <div class="rprice">$6.99</div>
+          <span class="btn btn-primary btn-block add-to-cart">Add to Cart</span>
+        </a>
+        <a href="lure-product.html" class="related-card">
+          <div class="rimg lure">🎣</div>
+          <h3>Lipless Crankbait — 1/2 oz — Red Craw</h3>
+          <div class="rprice">$7.99</div>
+          <span class="btn btn-primary btn-block add-to-cart">Add to Cart</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <a href="index.html" class="logo footer-logo">
+        <span class="logo-star">★</span>
+        <span class="logo-text">TX<strong>BALLISTICS</strong></span>
+      </a>
+      <ul class="footer-links">
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="#">Store &amp; Pickup</a></li>
+        <li><a href="#">Fishing &amp; Tackle</a></li>
+        <li><a href="#">Terms &amp; Conditions</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Texas Fishing Regs</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>© 2026 TX Ballistics, LLC · Central Texas · A valid Texas fishing license is required to fish public waters.</p>
+        <span class="bbb-badge">★ BBB Accredited</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/lure-product.js"></script>
+</body>
+</html>

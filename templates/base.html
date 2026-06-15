@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}TX Ballistics — Premium Ammo, Shipped Fast from Central Texas{% endblock %}</title>
+  <meta name="description" content="{% block description %}TX Ballistics is a Texas-based ammunition dealer offering in-stock handgun, rifle, and rimfire ammo plus fishing tackle, reserved for local pickup.{% endblock %}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+  {% block extra_css %}{% endblock %}
+  <style>
+    :root {
+      --green: {{ site_config.primary_color }};
+      --green-dark: color-mix(in srgb, {{ site_config.primary_color }} 70%, #000);
+      --green-light: color-mix(in srgb, {{ site_config.primary_color }} 78%, #fff);
+    }
+  </style>
+</head>
+<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+
+  <!-- ===== TIER 1: Top Utility Bar ===== -->
+  <div class="utility-bar">
+    <div class="container utility-inner">
+      <a href="{% url 'core:home' %}" class="logo">
+        <span class="logo-star">★</span>
+        <span class="logo-text">TX<strong>BALLISTICS</strong></span>
+      </a>
+      <ul class="trust-bullets">
+        <li><span class="check">✓</span> In Stock &amp; Ready</li>
+        <li><span class="check">✓</span> Local Pickup</li>
+        <li><span class="check">✓</span> {{ site_config.guarantee_copy }}</li>
+      </ul>
+      <div class="utility-actions">
+        {% if user.is_authenticated %}
+          <a href="{% url 'accounts:dashboard' %}" class="util-link account-link"><span class="util-ico">👤</span> Account</a>
+        {% else %}
+          <a href="{% url 'accounts:login' %}" class="util-link account-link"><span class="util-ico">👤</span> Account</a>
+        {% endif %}
+        {% if not site_config.catalog_mode %}
+          <a href="{% url 'cart:detail' %}" class="util-link cart-link"><span class="util-ico">🛒</span> Cart <span class="cart-count">{{ cart_count }}</span></a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TIER 2: Primary Navigation ===== -->
+  <nav class="primary-nav">
+    <div class="container nav-inner">
+      <a href="{% url 'core:home' %}" class="nav-home" aria-label="Home">⌂</a>
+      <ul class="nav-links">
+        {% for cat in nav_categories %}
+          <li><a href="{{ cat.get_absolute_url }}"{% if cat.product_type == 'tackle' %} class="nav-fishing"{% endif %}>{{ cat.name }}</a></li>
+        {% endfor %}
+        <li><a href="{% url 'core:about' %}">About</a></li>
+      </ul>
+      <form class="nav-search" action="{% url 'catalog:search' %}" method="get">
+        <input type="search" name="q" value="{{ request.GET.q }}" placeholder="Search by caliber, brand, grain…" aria-label="Search" />
+        <button type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+
+  {% if messages %}
+  <div class="container" style="margin-top:14px;">
+    {% for message in messages %}
+      <div class="flash flash-{{ message.tags }}" style="padding:10px 14px;border-radius:8px;margin-bottom:8px;background:#eef0f2;border-left:4px solid var(--green);">{{ message }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% block body %}{% endblock %}
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <a href="{% url 'core:home' %}" class="logo footer-logo">
+        <span class="logo-star">★</span>
+        <span class="logo-text">TX<strong>BALLISTICS</strong></span>
+      </a>
+      <ul class="footer-links">
+        <li><a href="{% url 'core:about' %}">About Us</a></li>
+        <li><a href="#">Store &amp; Pickup</a></li>
+        <li><a href="#">Free Targets</a></li>
+        <li><a href="#">Terms &amp; Conditions</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Texas Gun Laws</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>© 2026 TX Ballistics, LLC · Central Texas · Must be 18+ (handgun ammo 21+) to purchase.</p>
+        <span class="bbb-badge">★ BBB Accredited</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="{% static 'js/htmx.min.js' %}"></script>
+  <script src="{% static 'js/cart-feedback.js' %}"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

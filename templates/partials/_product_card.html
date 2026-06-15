@@ -1,0 +1,36 @@
+{% load static catalog_extras %}
+<article class="product-card">
+  {% if site_config.show_stock %}
+    <span class="stock-badge {{ p.stock_status }}">{% if p.stock_status == 'out' %}OUT OF STOCK{% else %}{{ p.total_stock }} IN STOCK{% endif %}</span>
+  {% endif %}
+  <a href="{{ p.get_absolute_url }}" class="pc-img">
+    {% if p.image %}<img src="{{ p.image.url }}" alt="{{ p.title }}" />{% else %}{{ p.caliber_label }}{% endif %}
+  </a>
+  <div class="pc-body">
+    <h3><a href="{{ p.get_absolute_url }}">{{ p.title }}</a></h3>
+    <div class="pc-rating">{{ p.avg_rating|stars }} <span>({{ p.review_count }} reviews)</span></div>
+    <ul class="pc-specs">
+      {% if p.rounds_per_unit %}<li>{{ p.rounds_per_unit }} rounds</li>{% endif %}
+      {% if p.manufacturer %}<li>{{ p.manufacturer.name }}</li>{% endif %}
+      {% if p.grain %}<li>{{ p.grain }}gr {{ p.bullet_type }}</li>{% endif %}
+      {% if p.casing %}<li>{{ p.casing }} case</li>{% endif %}
+      {% if p.use_type %}<li>{{ p.use_type }}</li>{% endif %}
+    </ul>
+  </div>
+  <div class="pc-buy">
+    <div>
+      {% if p.is_on_sale %}
+        <span class="pc-was">${{ p.price }}</span><span class="pc-price sale">${{ p.sale_price }}</span>
+      {% else %}
+        <span class="pc-price">${{ p.price }}</span>
+      {% endif %}
+    </div>
+    {% if p.cost_per_round %}<span class="pc-cpr">{{ p.cost_per_round_cents }} / round</span>{% endif %}
+    {% if not site_config.catalog_mode %}
+      <form hx-post="{% url 'cart:add' %}" hx-target=".cart-count" hx-swap="innerHTML">
+        <input type="hidden" name="product_id" value="{{ p.id }}" />
+        <button class="btn btn-primary btn-block add-to-cart" type="submit">Add to Cart</button>
+      </form>
+    {% endif %}
+  </div>
+</article>

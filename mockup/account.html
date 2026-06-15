@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Account — TX Ballistics</title>
+  <meta name="description" content="Manage your TX Ballistics account — track orders, view pickup status, and update your profile." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/account.css" />
+</head>
+<body>
+
+  <!-- ===== TIER 1: Top Utility Bar ===== -->
+  <div class="utility-bar">
+    <div class="container utility-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-star">★</span>
+        <span class="logo-text">TX<strong>BALLISTICS</strong></span>
+      </a>
+      <ul class="trust-bullets">
+        <li><span class="check">✓</span> In Stock &amp; Ready</li>
+        <li><span class="check">✓</span> Local Pickup</li>
+        <li><span class="check">✓</span> $100 Guarantee</li>
+      </ul>
+      <div class="utility-actions">
+        <a href="signin.html" class="util-link account-link"><span class="util-ico">👤</span> Account</a>
+        <a href="cart.html" class="util-link cart-link"><span class="util-ico">🛒</span> Cart <span class="cart-count">3</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TIER 2: Primary Navigation ===== -->
+  <nav class="primary-nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-home" aria-label="Home">⌂</a>
+      <ul class="nav-links">
+        <li><a href="#">Handgun</a></li>
+        <li><a href="#">Rifle</a></li>
+        <li><a href="#">Shotgun</a></li>
+        <li><a href="#">Rimfire</a></li>
+        <li><a href="#">Bulk Ammo</a></li>
+        <li><a href="#" class="nav-special">Specials</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="#">FAQ</a></li>
+      </ul>
+      <form class="nav-search" onsubmit="return false;">
+        <input type="search" placeholder="Search by caliber, brand, grain…" aria-label="Search" />
+        <button type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+
+  <!-- ===== Account banner ===== -->
+  <header class="account-banner">
+    <div class="container account-banner-inner">
+      <div class="avatar">TB</div>
+      <div>
+        <p class="welcome-eyebrow">★ Member since 2023</p>
+        <h1>Welcome back, Travis</h1>
+        <p class="welcome-sub">Dripping Springs, TX · Gold Customer</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== Account body ===== -->
+  <section class="section account-section">
+    <div class="container account-layout">
+
+      <!-- Sidebar -->
+      <aside class="account-nav">
+        <button class="acct-link active" data-tab="dashboard"><span>▣</span> Dashboard</button>
+        <button class="acct-link" data-tab="orders"><span>📦</span> Orders</button>
+        <button class="acct-link" data-tab="saved"><span>♥</span> Saved Items</button>
+        <button class="acct-link" data-tab="profile"><span>👤</span> Profile</button>
+        <button class="acct-link" data-tab="security"><span>🔒</span> Login &amp; Security</button>
+        <a href="signin.html" class="acct-link signout"><span>↪</span> Sign Out</a>
+      </aside>
+
+      <!-- Content -->
+      <div class="account-content">
+
+        <!-- DASHBOARD -->
+        <div class="acct-panel active" id="tab-dashboard">
+          <h2 class="panel-title">Dashboard</h2>
+
+          <div class="stat-grid">
+            <div class="stat-card"><span class="stat-num">14</span><span class="stat-label">Total Orders</span></div>
+            <div class="stat-card highlight"><span class="stat-num">1</span><span class="stat-label">Ready for Pickup</span></div>
+            <div class="stat-card"><span class="stat-num">6</span><span class="stat-label">Saved Items</span></div>
+            <div class="stat-card"><span class="stat-num">$2,140</span><span class="stat-label">Lifetime Spend</span></div>
+          </div>
+
+          <div class="ready-banner">
+            <div>
+              <strong>📦 Order #TX-10482 is ready for pickup!</strong>
+              <p>Main Counter · Dripping Springs · Bring valid photo ID</p>
+            </div>
+            <a href="#" class="btn btn-accent" data-tab-jump="orders">View Order</a>
+          </div>
+
+          <h3 class="sub-head">Recent Orders</h3>
+          <div class="order-list">
+            <div class="order-row">
+              <div class="or-id">#TX-10482<span class="or-date">Jun 12, 2026</span></div>
+              <div class="or-items">9mm Luger 115gr FMJ + 2 more</div>
+              <div class="or-total">$833.48</div>
+              <span class="or-status ready">Ready for Pickup</span>
+            </div>
+            <div class="order-row">
+              <div class="or-id">#TX-10336<span class="or-date">May 28, 2026</span></div>
+              <div class="or-items">5.56 NATO 55gr FMJ — 1000 rds</div>
+              <div class="or-total">$469.99</div>
+              <span class="or-status complete">Picked Up</span>
+            </div>
+            <div class="order-row">
+              <div class="or-id">#TX-10201<span class="or-date">Apr 09, 2026</span></div>
+              <div class="or-items">.22 LR 40gr LRN — 2000 rds</div>
+              <div class="or-total">$159.99</div>
+              <span class="or-status complete">Picked Up</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ORDERS -->
+        <div class="acct-panel" id="tab-orders">
+          <h2 class="panel-title">Order History</h2>
+          <div class="order-list">
+            <div class="order-card">
+              <div class="oc-head">
+                <div><strong>Order #TX-10482</strong><span class="oc-date">Placed Jun 12, 2026</span></div>
+                <span class="or-status ready">Ready for Pickup</span>
+              </div>
+              <div class="oc-body">
+                <div class="oc-line"><span class="oc-thumb">9mm</span> 9mm Luger 115gr FMJ — Blazer Brass — 1,000 rds <span class="oc-qty">×1</span></div>
+                <div class="oc-line"><span class="oc-thumb">.22LR</span> .22 LR 40gr LRN — CCI — 2,000 rds <span class="oc-qty">×2</span></div>
+                <div class="oc-line"><span class="oc-thumb">12GA</span> 12 Gauge 00 Buck — Winchester — 250 rds <span class="oc-qty">×1</span></div>
+              </div>
+              <div class="oc-foot">
+                <span>Pickup: <strong>Main Counter, Dripping Springs</strong></span>
+                <span class="oc-total">Total $833.48</span>
+              </div>
+              <div class="oc-actions">
+                <a href="#" class="btn btn-primary">Get Directions</a>
+                <a href="#" class="btn btn-ghost btn-dark">View Receipt</a>
+              </div>
+            </div>
+
+            <div class="order-card">
+              <div class="oc-head">
+                <div><strong>Order #TX-10336</strong><span class="oc-date">Placed May 28, 2026</span></div>
+                <span class="or-status complete">Picked Up</span>
+              </div>
+              <div class="oc-body">
+                <div class="oc-line"><span class="oc-thumb">5.56</span> 5.56 NATO 55gr FMJ — Federal — 1,000 rds <span class="oc-qty">×1</span></div>
+              </div>
+              <div class="oc-foot">
+                <span>Picked up May 29, 2026</span>
+                <span class="oc-total">Total $469.99</span>
+              </div>
+              <div class="oc-actions">
+                <a href="#" class="btn btn-primary">Buy Again</a>
+                <a href="#" class="btn btn-ghost btn-dark">View Receipt</a>
+              </div>
+            </div>
+
+            <div class="order-card">
+              <div class="oc-head">
+                <div><strong>Order #TX-10201</strong><span class="oc-date">Placed Apr 09, 2026</span></div>
+                <span class="or-status complete">Picked Up</span>
+              </div>
+              <div class="oc-body">
+                <div class="oc-line"><span class="oc-thumb">.22LR</span> .22 LR 40gr LRN — CCI — 2,000 rds <span class="oc-qty">×1</span></div>
+              </div>
+              <div class="oc-foot">
+                <span>Picked up Apr 10, 2026</span>
+                <span class="oc-total">Total $159.99</span>
+              </div>
+              <div class="oc-actions">
+                <a href="#" class="btn btn-primary">Buy Again</a>
+                <a href="#" class="btn btn-ghost btn-dark">View Receipt</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SAVED -->
+        <div class="acct-panel" id="tab-saved">
+          <h2 class="panel-title">Saved Items</h2>
+          <p class="panel-note">Get a restock alert and one-tap reorder for the loads you buy most.</p>
+          <div class="saved-grid">
+            <article class="saved-card">
+              <div class="sv-img">9mm</div>
+              <h3>9mm 124gr JHP — Speer Gold Dot — 50 rds</h3>
+              <div class="sv-price">$39.99</div>
+              <span class="sv-stock">✓ In stock</span>
+              <button class="btn btn-primary btn-block add-to-cart">Add to Cart</button>
+            </article>
+            <article class="saved-card">
+              <div class="sv-img">.308</div>
+              <h3>.308 Win 150gr SP — Hornady — 200 rds</h3>
+              <div class="sv-price">$229.99</div>
+              <span class="sv-stock low">⚠ Low stock</span>
+              <button class="btn btn-primary btn-block add-to-cart">Add to Cart</button>
+            </article>
+            <article class="saved-card">
+              <div class="sv-img">.45</div>
+              <h3>.45 ACP 230gr FMJ — Magtech — 500 rds</h3>
+              <div class="sv-price">$274.99</div>
+              <span class="sv-stock out">✕ Out of stock</span>
+              <button class="btn btn-ghost btn-dark btn-block">Notify Me</button>
+            </article>
+          </div>
+        </div>
+
+        <!-- PROFILE -->
+        <div class="acct-panel" id="tab-profile">
+          <h2 class="panel-title">Profile</h2>
+          <form class="acct-form" onsubmit="return false;">
+            <div class="field-grid">
+              <label class="field"><span>First name</span><input type="text" value="Travis" /></label>
+              <label class="field"><span>Last name</span><input type="text" value="Bishop" /></label>
+              <label class="field"><span>Email</span><input type="email" value="travis.b@email.com" /></label>
+              <label class="field"><span>Mobile phone</span><input type="tel" value="(512) 555-0142" /></label>
+            </div>
+
+            <h3 class="sub-head">Default Pickup Location</h3>
+            <label class="field"><span>Preferred store</span>
+              <select>
+                <option>Main Counter — Dripping Springs, TX</option>
+                <option>Range &amp; Pro Shop — Marble Falls, TX</option>
+              </select>
+            </label>
+
+            <h3 class="sub-head">Communication</h3>
+            <label class="checkbox"><input type="checkbox" checked /> Text me when an order is ready for pickup</label>
+            <label class="checkbox"><input type="checkbox" checked /> Email me restock alerts for saved items</label>
+            <label class="checkbox"><input type="checkbox" /> Send me weekly specials &amp; deals</label>
+
+            <button class="btn btn-primary acct-save">Save Changes</button>
+          </form>
+        </div>
+
+        <!-- SECURITY -->
+        <div class="acct-panel" id="tab-security">
+          <h2 class="panel-title">Login &amp; Security</h2>
+          <form class="acct-form" onsubmit="return false;">
+            <label class="field field-half"><span>Current password</span><input type="password" value="········" /></label>
+            <div class="field-grid">
+              <label class="field"><span>New password</span><input type="password" placeholder="••••••••" /></label>
+              <label class="field"><span>Confirm new password</span><input type="password" placeholder="••••••••" /></label>
+            </div>
+
+            <div class="security-row">
+              <div>
+                <strong>Two-Factor Authentication</strong>
+                <p>Add an extra layer of security with a text code at sign-in.</p>
+              </div>
+              <label class="switch"><input type="checkbox" checked /><span class="slider"></span></label>
+            </div>
+
+            <button class="btn btn-primary acct-save">Update Password</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <a href="index.html" class="logo footer-logo">
+        <span class="logo-star">★</span>
+        <span class="logo-text">TX<strong>BALLISTICS</strong></span>
+      </a>
+      <ul class="footer-links">
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="#">Store &amp; Pickup</a></li>
+        <li><a href="#">Free Targets</a></li>
+        <li><a href="#">Terms &amp; Conditions</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Texas Gun Laws</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>© 2026 TX Ballistics, LLC · Central Texas · Must be 18+ (handgun ammo 21+) to purchase.</p>
+        <span class="bbb-badge">★ BBB Accredited</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/account.js"></script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}My Account — TX Ballistics{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/account.css' %}" />{% endblock %}
+
+{% block body %}
+<header class="account-banner">
+  <div class="container account-banner-inner">
+    <div class="avatar">{{ user.initials }}</div>
+    <div>
+      <p class="welcome-eyebrow">★ Member since {{ user.member_since|date:"Y" }}</p>
+      <h1>Welcome back, {{ user.first_name|default:user.email }}</h1>
+      <p class="welcome-sub">{% if user.customer_tier %}{{ user.customer_tier }} Customer{% endif %}</p>
+    </div>
+  </div>
+</header>
+
+<section class="section account-section">
+  <div class="container account-layout">
+    <aside class="account-nav">
+      <button class="acct-link {% if active_tab == 'dashboard' %}active{% endif %}" data-tab="dashboard"><span>▣</span> Dashboard</button>
+      <button class="acct-link {% if active_tab == 'orders' %}active{% endif %}" data-tab="orders"><span>📦</span> Orders</button>
+      <button class="acct-link {% if active_tab == 'saved' %}active{% endif %}" data-tab="saved"><span>♥</span> Saved Items</button>
+      <button class="acct-link {% if active_tab == 'profile' %}active{% endif %}" data-tab="profile"><span>👤</span> Profile</button>
+      <a href="{% url 'accounts:logout' %}" class="acct-link signout"><span>↪</span> Sign Out</a>
+    </aside>
+
+    <div class="account-content">
+      <!-- DASHBOARD -->
+      <div class="acct-panel {% if active_tab == 'dashboard' %}active{% endif %}" id="tab-dashboard">
+        <h2 class="panel-title">Dashboard</h2>
+        <div class="stat-grid">
+          <div class="stat-card"><span class="stat-num">{{ stats.orders }}</span><span class="stat-label">Total Orders</span></div>
+          <div class="stat-card highlight"><span class="stat-num">{{ stats.ready }}</span><span class="stat-label">Ready for Pickup</span></div>
+          <div class="stat-card"><span class="stat-num">{{ stats.saved }}</span><span class="stat-label">Saved Items</span></div>
+          <div class="stat-card"><span class="stat-num">${{ stats.lifetime|floatformat:0 }}</span><span class="stat-label">Lifetime Spend</span></div>
+        </div>
+        <h3 class="sub-head">Recent Orders</h3>
+        <div class="order-list">
+          {% for o in orders %}
+          <div class="order-row">
+            <div class="or-id">#{{ o.number }}<span class="or-date">{{ o.created_at|date:"M d, Y" }}</span></div>
+            <div class="or-items">{{ o.items.first.title }}{% if o.items.count > 1 %} + {{ o.items.count|add:"-1" }} more{% endif %}</div>
+            <div class="or-total">${{ o.total }}</div>
+            <span class="or-status {% if o.status == 'ready' %}ready{% else %}complete{% endif %}">{{ o.get_status_display }}</span>
+          </div>
+          {% empty %}<p>No orders yet.</p>{% endfor %}
+        </div>
+      </div>
+
+      <!-- ORDERS -->
+      <div class="acct-panel {% if active_tab == 'orders' %}active{% endif %}" id="tab-orders">
+        <h2 class="panel-title">Order History</h2>
+        <div class="order-list">
+          {% for o in orders %}
+          <div class="order-card">
+            <div class="oc-head">
+              <div><strong>Order #{{ o.number }}</strong><span class="oc-date">Placed {{ o.created_at|date:"M d, Y" }}</span></div>
+              <span class="or-status {% if o.status == 'ready' %}ready{% else %}complete{% endif %}">{{ o.get_status_display }}</span>
+            </div>
+            <div class="oc-body">
+              {% for it in o.items.all %}<div class="oc-line"><span class="oc-thumb">{{ it.caliber_label }}</span> {{ it.title }} <span class="oc-qty">×{{ it.quantity }}</span></div>{% endfor %}
+            </div>
+            <div class="oc-foot">
+              <span>{% if o.has_ship_items %}Shipping{% else %}Pickup{% endif %}</span>
+              <span class="oc-total">Total ${{ o.total }}</span>
+            </div>
+            <div class="oc-actions">
+              <a href="{% url 'orders:confirmation' o.number %}" class="btn btn-primary">View Order</a>
+            </div>
+          </div>
+          {% empty %}<p>No orders yet.</p>{% endfor %}
+        </div>
+      </div>
+
+      <!-- SAVED -->
+      <div class="acct-panel {% if active_tab == 'saved' %}active{% endif %}" id="tab-saved">
+        <h2 class="panel-title">Saved Items</h2>
+        <div class="saved-grid">
+          {% for s in saved %}
+          <article class="saved-card">
+            <div class="sv-img">{{ s.product.caliber_label }}</div>
+            <h3>{{ s.product.title }}</h3>
+            <div class="sv-price">${{ s.product.current_price }}</div>
+            <a href="{{ s.product.get_absolute_url }}" class="btn btn-primary btn-block">View</a>
+          </article>
+          {% empty %}<p>No saved items yet.</p>{% endfor %}
+        </div>
+      </div>
+
+      <!-- PROFILE -->
+      <div class="acct-panel {% if active_tab == 'profile' %}active{% endif %}" id="tab-profile">
+        <h2 class="panel-title">Profile</h2>
+        <form class="acct-form" method="post" action="{% url 'accounts:profile_update' %}">
+          {% csrf_token %}
+          <div class="field-grid">
+            <label class="field"><span>First name</span><input type="text" name="first_name" value="{{ user.first_name }}" /></label>
+            <label class="field"><span>Last name</span><input type="text" name="last_name" value="{{ user.last_name }}" /></label>
+            <label class="field"><span>Email</span><input type="email" name="email" value="{{ user.email }}" /></label>
+            <label class="field"><span>Mobile phone</span><input type="tel" name="phone" value="{{ user.phone }}" /></label>
+          </div>
+          <h3 class="sub-head">Communication</h3>
+          <label class="checkbox"><input type="checkbox" name="notify_pickup_email" {% if user.notify_pickup_email %}checked{% endif %} /> Email me when an order is ready for pickup</label>
+          <label class="checkbox"><input type="checkbox" name="notify_restock_email" {% if user.notify_restock_email %}checked{% endif %} /> Email me restock alerts for saved items</label>
+          <label class="checkbox"><input type="checkbox" name="notify_weekly_deals" {% if user.notify_weekly_deals %}checked{% endif %} /> Send me weekly specials &amp; deals</label>
+          <button class="btn btn-primary acct-save" type="submit">Save Changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}<script src="{% static 'js/account.js' %}"></script>{% endblock %}

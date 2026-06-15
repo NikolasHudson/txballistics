@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load static catalog_extras %}
+
+{% block title %}{{ product.title }} | TX Ballistics{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/product.css' %}" />
+<link rel="stylesheet" href="{% static 'css/lure-product.css' %}" />
+{% endblock %}
+
+{% block body %}
+  <div class="breadcrumb">
+    <div class="container">
+      <a href="{% url 'core:home' %}">Home</a><span class="sep">›</span>
+      {% if product.category.parent %}<a href="{{ product.category.parent.get_absolute_url }}">{{ product.category.parent.name }}</a><span class="sep">›</span>{% endif %}
+      <a href="{{ product.category.get_absolute_url }}">{{ product.category.name }}</a><span class="sep">›</span>
+      <span class="current">{{ product.title }}</span>
+    </div>
+  </div>
+
+  <section class="product-top">
+    <div class="container product-grid">
+      <div class="gallery">
+        <div class="gallery-main lure-main">
+          <span id="gallery-main-label">{% if product.image %}<img src="{{ product.image.url }}" alt="{{ product.title }}" />{% else %}{{ product.caliber_label|default:"🎣" }}{% endif %}</span>
+        </div>
+      </div>
+
+      <div class="buy-box">
+        <h1>{{ product.title }}</h1>
+        <div class="buy-meta">
+          <span class="buy-rating">{{ product.avg_rating|stars }} <a href="#reviews">({{ product.review_count }} reviews)</a></span>
+          {% if site_config.show_stock %}<span class="in-stock-pill water">{% if product.in_stock %}{{ product.total_stock }} IN STOCK{% else %}OUT OF STOCK{% endif %}</span>{% endif %}
+          <span class="buy-sku">SKU: {{ product.sku }}</span>
+        </div>
+
+        <div class="price-row">
+          <span class="price-now">${{ product.current_price }}</span>
+          {% if product.is_on_sale %}<span class="price-was">${{ product.price }}</span><span class="price-save">Save ${{ product.savings }}</span>{% endif %}
+        </div>
+
+        {% if variants %}
+        <div class="swatch-block">
+          <div class="swatch-label">Color: <span id="swatch-name">{{ variants.0.name }}</span></div>
+          <div class="swatches" id="swatches">
+            {% for v in variants %}
+              <button type="button" class="swatch{% if forloop.first %} active{% endif %}" data-name="{{ v.name }}" data-variant="{{ v.id }}" data-price="{{ v.price }}" style="--sw1:{{ v.swatch_color_1 }};--sw2:{{ v.swatch_color_2 }}" title="{{ v.name }}"></button>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+
+        {% if not site_config.catalog_mode %}
+        <form class="buy-actions" hx-post="{% url 'cart:add' %}" hx-target=".cart-count" hx-swap="innerHTML">
+          <input type="hidden" name="product_id" value="{{ product.id }}" />
+          <input type="hidden" name="variant_id" id="variant-id" value="{% if variants %}{{ variants.0.id }}{% endif %}" />
+          <div class="qty-stepper">
+            <button type="button" id="qty-minus" aria-label="Decrease quantity">−</button>
+            <input id="qty" name="quantity" type="text" inputmode="numeric" value="1" aria-label="Quantity" />
+            <button type="button" id="qty-plus" aria-label="Increase quantity">+</button>
+          </div>
+          <button class="btn btn-primary add-to-cart" id="main-add" type="submit" data-unit-price="{{ product.current_price }}">Add to Cart — <span id="buy-total">${{ product.current_price }}</span></button>
+        </form>
+        <p class="ship-note">{% if product.resolved_fulfillment == 'ship' %}Ships next business day · Free shipping over ${{ site_config.free_shipping_threshold }}{% else %}Reserve online for local pickup{% endif %}</p>
+        {% endif %}
+
+        <ul class="buy-reassure">
+          <li><span class="ico">✓</span> Backed by our {{ site_config.guarantee_copy }}</li>
+          <li><span class="ico">✓</span> Hand-picked colors proven on Texas reservoirs</li>
+        </ul>
+
+        {% if product.specs.all %}
+        <div class="quick-specs">
+          {% for s in product.specs.all|slice:":6" %}<div><span class="k">{{ s.label }}</span><span class="v">{{ s.value }}</span></div>{% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+  {% if product.description %}
+  <section class="detail-section alt">
+    <div class="container"><h2>Description</h2><p>{{ product.description }}</p></div>
+  </section>
+  {% endif %}
+
+  {% if product.specs.all %}
+  <section class="detail-section">
+    <div class="container">
+      <h2>Specifications</h2>
+      <table class="spec-table">
+        {% for s in product.specs.all %}<tr><td class="k">{{ s.label }}</td><td>{{ s.value }}</td></tr>{% endfor %}
+      </table>
+    </div>
+  </section>
+  {% endif %}
+
+  {% include "catalog/_reviews.html" %}
+  {% include "catalog/_related.html" %}
+{% endblock %}
+
+{% block extra_js %}<script src="{% static 'js/product.js' %}"></script>{% endblock %}

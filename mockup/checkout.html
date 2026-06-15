@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout — TX Ballistics</title>
+  <meta name="description" content="Reserve your ammo for local pickup at TX Ballistics. Quick, secure checkout with pickup at our Central Texas counter." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/checkout.css" />
+</head>
+<body>
+
+  <!-- ===== TIER 1: Top Utility Bar ===== -->
+  <div class="utility-bar">
+    <div class="container utility-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-star">★</span>
+        <span class="logo-text">TX<strong>BALLISTICS</strong></span>
+      </a>
+      <ul class="trust-bullets">
+        <li><span class="check">✓</span> Secure Checkout</li>
+        <li><span class="check">✓</span> Local Pickup</li>
+        <li><span class="check">✓</span> $100 Guarantee</li>
+      </ul>
+      <div class="utility-actions">
+        <a href="signin.html" class="util-link account-link"><span class="util-ico">👤</span> Account</a>
+        <a href="cart.html" class="util-link cart-link"><span class="util-ico">🛒</span> Cart <span class="cart-count">3</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Slim checkout nav ===== -->
+  <nav class="checkout-nav">
+    <div class="container checkout-nav-inner">
+      <a href="cart.html" class="back-link">← Back to cart</a>
+      <ol class="checkout-steps">
+        <li class="done"><span class="step-num">✓</span> Cart</li>
+        <li class="active"><span class="step-num">2</span> Checkout</li>
+        <li><span class="step-num">3</span> Confirmation</li>
+      </ol>
+      <span class="secure-note">🔒 Secure</span>
+    </div>
+  </nav>
+
+  <!-- ===== Checkout ===== -->
+  <section class="section checkout-section">
+    <div class="container">
+      <h1 class="page-title">Checkout</h1>
+
+      <form class="checkout-layout" onsubmit="return false;">
+
+        <!-- LEFT: form -->
+        <div class="checkout-main">
+
+          <!-- Contact -->
+          <fieldset class="co-block">
+            <legend><span class="co-step">1</span> Contact Information</legend>
+            <div class="field-grid">
+              <label class="field">
+                <span>First name</span>
+                <input type="text" autocomplete="given-name" placeholder="Travis" />
+              </label>
+              <label class="field">
+                <span>Last name</span>
+                <input type="text" autocomplete="family-name" placeholder="Bishop" />
+              </label>
+              <label class="field">
+                <span>Email</span>
+                <input type="email" autocomplete="email" placeholder="you@email.com" />
+              </label>
+              <label class="field">
+                <span>Mobile phone</span>
+                <input type="tel" autocomplete="tel" placeholder="(512) 555-0142" />
+              </label>
+            </div>
+            <label class="checkbox">
+              <input type="checkbox" checked /> Text me when my order is ready for pickup
+            </label>
+          </fieldset>
+
+          <!-- Pickup -->
+          <fieldset class="co-block">
+            <legend><span class="co-step">2</span> Pickup Location</legend>
+            <p class="co-note">All orders are reserved for in-person pickup. We'll email you when your order is bagged and ready — usually same day.</p>
+            <label class="store-option selected">
+              <input type="radio" name="store" checked />
+              <span class="store-info">
+                <strong>TX Ballistics — Main Counter</strong>
+                <span>1487 Ranch Road, Dripping Springs, TX 78620</span>
+                <span class="store-hours">Mon–Sat 9am–7pm · Closed Sunday</span>
+                <span class="store-ready">✓ Ready today if ordered before 4pm</span>
+              </span>
+            </label>
+            <label class="store-option">
+              <input type="radio" name="store" />
+              <span class="store-info">
+                <strong>TX Ballistics — Range &amp; Pro Shop</strong>
+                <span>92 Gun Club Road, Marble Falls, TX 78654</span>
+                <span class="store-hours">Tue–Sun 10am–6pm</span>
+                <span class="store-ready">✓ Ready in 1–2 business days</span>
+              </span>
+            </label>
+          </fieldset>
+
+          <!-- Age / ID -->
+          <fieldset class="co-block">
+            <legend><span class="co-step">3</span> Age &amp; ID Verification</legend>
+            <p class="co-note">Texas &amp; federal law require a valid government photo ID at pickup. Rifle/shotgun ammo 18+, handgun ammo 21+.</p>
+            <label class="field field-half">
+              <span>Date of birth</span>
+              <input type="date" />
+            </label>
+            <label class="checkbox">
+              <input type="checkbox" /> I confirm I am of legal age and will present valid photo ID at pickup
+            </label>
+            <label class="checkbox">
+              <input type="checkbox" /> I am not prohibited by law from purchasing ammunition
+            </label>
+          </fieldset>
+
+          <!-- Payment -->
+          <fieldset class="co-block">
+            <legend><span class="co-step">4</span> Payment</legend>
+
+            <label class="pay-option selected">
+              <input type="radio" name="pay" checked />
+              <span class="pay-info">
+                <strong>Pay now — Card</strong>
+                <span>Reserve and pay online. Skip the line at pickup.</span>
+              </span>
+            </label>
+
+            <div class="card-fields">
+              <label class="field">
+                <span>Card number</span>
+                <input type="text" inputmode="numeric" placeholder="1234 5678 9012 3456" />
+              </label>
+              <div class="field-grid">
+                <label class="field">
+                  <span>Expiration</span>
+                  <input type="text" placeholder="MM / YY" />
+                </label>
+                <label class="field">
+                  <span>CVC</span>
+                  <input type="text" inputmode="numeric" placeholder="123" />
+                </label>
+              </div>
+            </div>
+
+            <label class="pay-option">
+              <input type="radio" name="pay" />
+              <span class="pay-info">
+                <strong>Pay at pickup</strong>
+                <span>Reserve now, pay with card or cash at the counter.</span>
+              </span>
+            </label>
+          </fieldset>
+
+          <p class="co-fineprint">By placing this order you agree to our Terms &amp; Conditions and confirm your order will be cancelled if ID requirements are not met at pickup.</p>
+        </div>
+
+        <!-- RIGHT: summary -->
+        <aside class="checkout-summary">
+          <h2>Order Summary</h2>
+
+          <ul class="cs-items">
+            <li>
+              <span class="cs-thumb">9mm</span>
+              <span class="cs-meta"><strong>9mm Luger 115gr FMJ</strong><span>Blazer Brass · 1,000 rds</span><span class="cs-qty">Qty 1</span></span>
+              <span class="cs-price">$249.99</span>
+            </li>
+            <li>
+              <span class="cs-thumb">.22LR</span>
+              <span class="cs-meta"><strong>.22 LR 40gr LRN</strong><span>CCI · 2,000 rds</span><span class="cs-qty">Qty 2</span></span>
+              <span class="cs-price">$319.98</span>
+            </li>
+            <li>
+              <span class="cs-thumb">12GA</span>
+              <span class="cs-meta"><strong>12ga 00 Buck</strong><span>Winchester · 250 rds</span><span class="cs-qty">Qty 1</span></span>
+              <span class="cs-price">$199.99</span>
+            </li>
+          </ul>
+
+          <div class="cs-row"><span>Subtotal</span><span>$769.96</span></div>
+          <div class="cs-row"><span>Local pickup</span><span class="os-free">FREE</span></div>
+          <div class="cs-row cs-muted"><span>Estimated tax (8.25%)</span><span>$63.52</span></div>
+          <div class="cs-row cs-total"><span>Total</span><span>$833.48</span></div>
+
+          <button class="btn btn-primary btn-block cs-place">Place Order</button>
+          <p class="cs-secure">🔒 Your information is encrypted and secure</p>
+
+          <ul class="cs-reassure">
+            <li><span class="ico">🛡️</span> $100 satisfaction guarantee</li>
+            <li><span class="ico">📦</span> Live inventory — it's on the shelf</li>
+            <li><span class="ico">🪪</span> Valid ID required at pickup</li>
+          </ul>
+        </aside>
+
+      </form>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <a href="index.html" class="logo footer-logo">
+        <span class="logo-star">★</span>
+        <span class="logo-text">TX<strong>BALLISTICS</strong></span>
+      </a>
+      <ul class="footer-links">
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="#">Store &amp; Pickup</a></li>
+        <li><a href="#">Free Targets</a></li>
+        <li><a href="#">Terms &amp; Conditions</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Texas Gun Laws</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>© 2026 TX Ballistics, LLC · Central Texas · Must be 18+ (handgun ammo 21+) to purchase.</p>
+        <span class="bbb-badge">★ BBB Accredited</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/checkout.js"></script>
+</body>
+</html>

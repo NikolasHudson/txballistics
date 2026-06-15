@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}About Us — TX Ballistics{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/about.css' %}" />{% endblock %}
+
+{% block body %}
+  <header class="about-hero">
+    <div class="container">
+      <p class="eyebrow">★ Family-Owned in Central Texas</p>
+      <h1>Real Ammo. Real People.</h1>
+      <p>We started TX Ballistics for one simple reason: shooters deserve a dealer who actually has what they sell, prices it fair, and knows the difference between the loads on the shelf.</p>
+    </div>
+  </header>
+
+  <section class="story">
+    <div class="container story-grid">
+      <div>
+        <h2>Built in the Hill Country</h2>
+        <p>TX Ballistics began at a kitchen table outside of Austin in 2019, when a handful of frustrated range buddies got tired of "in stock" ammo that never shipped, mystery counts, and prices that swung with the headlines.</p>
+        <p>So we built the shop we wanted to buy from. Every round we list is sitting on our shelf, counted by hand. You reserve it online and pick it up locally — no games, no backorders, no surprises at the counter.</p>
+        <p>We're still small, still family-run, and still shooting the same ammo we sell to you.</p>
+        <p class="signature">— The Hudson Family, Founders</p>
+      </div>
+      <div class="story-photo">Photo: the shop &amp; range</div>
+    </div>
+  </section>
+
+  <section class="values">
+    <div class="container">
+      <h2>What We Stand For</h2>
+      <div class="values-grid">
+        <div class="value-card"><span class="vnum">01</span><h3>Real Inventory</h3><p>If it's listed, it's on the shelf and counted by hand.</p></div>
+        <div class="value-card"><span class="vnum">02</span><h3>Honest Prices</h3><p>Fair cost-per-round you can compare at a glance.</p></div>
+        <div class="value-card"><span class="vnum">03</span><h3>Texas Service</h3><p>Talk to a real shooter. Call, email, or ask at pickup.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="container stats-grid">
+      <div class="stat"><div class="num">2019</div><div class="label">Established</div></div>
+      <div class="stat"><div class="num">52,000+</div><div class="label">Rounds In Stock</div></div>
+      <div class="stat"><div class="num">3,100+</div><div class="label">5-Star Reviews</div></div>
+      <div class="stat"><div class="num">100%</div><div class="label">Texas Owned</div></div>
+    </div>
+  </section>
+
+  <section class="store">
+    <div class="container store-grid">
+      <div>
+        <h2>Visit &amp; Pick Up</h2>
+        <p>Reserve online and grab your order in person at our central-Texas counter. Bring a valid ID — handgun ammo requires 21+.</p>
+        <ul class="store-info">
+          <li><span class="k">Hours</span><span>Mon–Fri 9a–6p · Sat 9a–4p · Sun closed</span></li>
+          <li><span class="k">Phone</span><span>{{ site_config.store_phone }}</span></li>
+          <li><span class="k">Email</span><span>{{ site_config.store_email }}</span></li>
+        </ul>
+      </div>
+      <div class="store-map">Map / Directions</div>
+    </div>
+  </section>
+
+  <section class="about-cta">
+    <div class="container">
+      <h2>Ready to Stock Up?</h2>
+      <p>Browse live inventory and reserve your rounds for local pickup.</p>
+      <a href="{% url 'core:home' %}" class="btn btn-accent">Shop All Ammo</a>
+    </div>
+  </section>
+{% endblock %}

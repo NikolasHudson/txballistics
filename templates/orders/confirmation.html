@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Order Confirmed — TX Ballistics{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/confirmation.css' %}" />{% endblock %}
+
+{% block body %}
+<section class="confirm-hero">
+  <div class="container">
+    <div class="confirm-check">✓</div>
+    <h1>Order Confirmed!</h1>
+    <p class="confirm-sub">Thanks, {{ order.first_name }} — your order is reserved. We'll email you the moment it's ready.</p>
+    <p class="confirm-order">Order <strong>#{{ order.number }}</strong> · Placed {{ order.created_at|date:"F j, Y" }}</p>
+  </div>
+</section>
+
+<section class="section confirm-section">
+  <div class="container confirm-layout">
+    <div class="confirm-main">
+      <div class="confirm-card bring-card">
+        <h2>🪪 What to Bring</h2>
+        <ul class="bring-list">
+          <li><span class="ico">✓</span> A valid government photo ID (driver's license, state ID, or passport)</li>
+          <li><span class="ico">✓</span> The card used to order — the name on it must match your ID</li>
+          <li><span class="ico">✓</span> Must be 18+ for rifle/shotgun ammo, 21+ for handgun ammo</li>
+          <li><span class="ico">✓</span> Your order number <strong>#{{ order.number }}</strong></li>
+        </ul>
+        <p class="bring-note">Heads up: orders that can't be verified will be held or cancelled.</p>
+      </div>
+
+      <div class="confirm-card">
+        <h2>Your Order</h2>
+        <ul class="confirm-items">
+          {% for it in order.items.all %}
+          <li>
+            <span class="ci-thumb">{{ it.caliber_label }}</span>
+            <span class="ci-meta"><strong>{{ it.title }}</strong><span>{% if it.variant_name %}{{ it.variant_name }} · {% endif %}Qty {{ it.quantity }} · {% if it.fulfillment == 'ship' %}Ships{% else %}Pickup{% endif %}</span></span>
+            <span class="ci-price">${{ it.line_total }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+        <div class="confirm-totals">
+          <div class="ct-row"><span>Subtotal</span><span>${{ order.subtotal }}</span></div>
+          {% if order.discount %}<div class="ct-row"><span>Discount</span><span>−${{ order.discount }}</span></div>{% endif %}
+          {% if order.has_pickup_items %}<div class="ct-row"><span>Local pickup</span><span class="os-free">FREE</span></div>{% endif %}
+          {% if order.has_ship_items %}<div class="ct-row"><span>Shipping</span><span>{% if order.shipping %}${{ order.shipping }}{% else %}<span class="os-free">FREE</span>{% endif %}</span></div>{% endif %}
+          <div class="ct-row ct-muted"><span>Tax</span><span>${{ order.tax }}</span></div>
+          <div class="ct-row ct-total"><span>Total</span><span>${{ order.total }}</span></div>
+        </div>
+        <p class="paid-note">{% if order.payment_status == 'paid' %}✓ Paid online{% else %}Pay at pickup{% endif %}</p>
+      </div>
+    </div>
+
+    <aside class="confirm-aside">
+      <div class="confirm-card pickup-card">
+        <h2>📍 Pickup Location</h2>
+        <div class="store-block">
+          <p>{{ site_config.pickup_address|linebreaksbr }}</p>
+        </div>
+        {% if site_config.pickup_instructions %}<p class="ready-eta">{{ site_config.pickup_instructions }}</p>{% endif %}
+      </div>
+
+      {% if order.has_ship_items %}
+      <div class="confirm-card pickup-card">
+        <h2>🚚 Shipping To</h2>
+        <div class="store-block">
+          <strong>{{ order.ship_name }}</strong>
+          <p>{{ order.ship_street }}<br />{{ order.ship_city }}, {{ order.ship_state }} {{ order.ship_zip }}</p>
+        </div>
+      </div>
+      {% endif %}
+
+      <div class="confirm-card help-card">
+        <h2>Need a Hand?</h2>
+        <p>Questions about your order or pickup? We're real people.</p>
+        <p class="help-line">📞 {{ site_config.store_phone }}</p>
+        <p class="help-line">✉ {{ site_config.store_email }}</p>
+      </div>
+    </aside>
+  </div>
+
+  <div class="container confirm-cta">
+    <a href="{% url 'core:home' %}" class="btn btn-primary">Continue Shopping</a>
+    <a href="{% url 'accounts:dashboard' %}" class="btn btn-ghost btn-dark">View in My Account</a>
+  </div>
+</section>
+{% endblock %}

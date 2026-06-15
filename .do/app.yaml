@@ -1,0 +1,47 @@
+# DigitalOcean App Platform spec.
+# Create the app from this file, then attach a managed Postgres DB named "db".
+name: txballistics
+region: nyc
+services:
+  - name: web
+    github:
+      repo: NikolasHudson/txballistics
+      branch: main
+      deploy_on_push: true
+    build_command: |
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput
+    run_command: gunicorn config.wsgi --workers 3 --bind 0.0.0.0:8080
+    http_port: 8080
+    instance_size_slug: basic-xxs
+    instance_count: 1
+    envs:
+      - key: DJANGO_SETTINGS_MODULE
+        value: config.settings.prod
+      - key: SECRET_KEY
+        scope: RUN_TIME
+        type: SECRET
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: ${APP_DOMAIN}
+      - key: CSRF_TRUSTED_ORIGINS
+        value: https://${APP_DOMAIN}
+      - key: DATABASE_URL
+        scope: RUN_TIME
+        value: ${db.DATABASE_URL}
+      - key: SENDGRID_API_KEY
+        scope: RUN_TIME
+        type: SECRET
+      - key: DEFAULT_FROM_EMAIL
+        value: TX Ballistics <howdy@txballistics.com>
+    jobs:
+      - name: migrate
+        kind: PRE_DEPLOY
+        run_command: python manage.py migrate --noinput
+
+databases:
+  - name: db
+    engine: PG
+    version: "16"
+    production: false

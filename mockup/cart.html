@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Cart — TX Ballistics</title>
+  <meta name="description" content="Review the ammo in your cart and reserve it for local pickup at TX Ballistics in Central Texas." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/cart.css" />
+</head>
+<body>
+
+  <!-- ===== TIER 1: Top Utility Bar ===== -->
+  <div class="utility-bar">
+    <div class="container utility-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-star">★</span>
+        <span class="logo-text">TX<strong>BALLISTICS</strong></span>
+      </a>
+      <ul class="trust-bullets">
+        <li><span class="check">✓</span> In Stock &amp; Ready</li>
+        <li><span class="check">✓</span> Local Pickup</li>
+        <li><span class="check">✓</span> $100 Guarantee</li>
+      </ul>
+      <div class="utility-actions">
+        <a href="signin.html" class="util-link account-link"><span class="util-ico">👤</span> Account</a>
+        <a href="cart.html" class="util-link cart-link"><span class="util-ico">🛒</span> Cart <span class="cart-count">3</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TIER 2: Primary Navigation ===== -->
+  <nav class="primary-nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-home" aria-label="Home">⌂</a>
+      <ul class="nav-links">
+        <li><a href="#">Handgun</a></li>
+        <li><a href="#">Rifle</a></li>
+        <li><a href="#">Shotgun</a></li>
+        <li><a href="#">Rimfire</a></li>
+        <li><a href="#">Bulk Ammo</a></li>
+        <li><a href="#" class="nav-special">Specials</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="#">FAQ</a></li>
+      </ul>
+      <form class="nav-search" onsubmit="return false;">
+        <input type="search" placeholder="Search by caliber, brand, grain…" aria-label="Search" />
+        <button type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+
+  <!-- ===== Breadcrumb ===== -->
+  <div class="breadcrumb">
+    <div class="container">
+      <a href="index.html">Home</a><span class="sep">›</span>
+      <span class="current">Your Cart</span>
+    </div>
+  </div>
+
+  <!-- ===== Cart ===== -->
+  <section class="section cart-section">
+    <div class="container">
+      <div class="page-head">
+        <h1>Your Cart</h1>
+        <p><span id="cart-item-count">3</span> items reserved for local pickup</p>
+      </div>
+
+      <div class="cart-layout">
+
+        <!-- Line items -->
+        <div class="cart-items" id="cart-items">
+
+          <article class="cart-item" data-price="249.99" data-qty="1">
+            <div class="ci-img">9mm</div>
+            <div class="ci-body">
+              <span class="tested-badge">✓ LAB TESTED</span>
+              <h3><a href="product.html">9mm Luger — 115gr FMJ — Blazer Brass — 1000 Rounds</a></h3>
+              <ul class="ci-specs">
+                <li>SKU: 9MM-BLZ-115</li>
+                <li>1,000 rounds</li>
+                <li>25¢ / round</li>
+              </ul>
+              <span class="ci-stock">✓ 84 in stock — ready for pickup</span>
+            </div>
+            <div class="ci-controls">
+              <div class="qty-stepper">
+                <button class="qty-minus" aria-label="Decrease quantity">−</button>
+                <input class="qty-input" type="text" inputmode="numeric" value="1" aria-label="Quantity" />
+                <button class="qty-plus" aria-label="Increase quantity">+</button>
+              </div>
+              <div class="ci-line-price">$249.99</div>
+              <button class="ci-remove" aria-label="Remove item">✕ Remove</button>
+            </div>
+          </article>
+
+          <article class="cart-item" data-price="159.99" data-qty="2">
+            <div class="ci-img">.22LR</div>
+            <div class="ci-body">
+              <span class="tested-badge">✓ LAB TESTED</span>
+              <h3><a href="product.html">.22 LR — 40gr LRN — CCI — 2000 Rounds</a></h3>
+              <ul class="ci-specs">
+                <li>SKU: 22LR-CCI-40</li>
+                <li>2,000 rounds</li>
+                <li>8¢ / round</li>
+              </ul>
+              <span class="ci-stock">✓ 60 in stock — ready for pickup</span>
+            </div>
+            <div class="ci-controls">
+              <div class="qty-stepper">
+                <button class="qty-minus" aria-label="Decrease quantity">−</button>
+                <input class="qty-input" type="text" inputmode="numeric" value="2" aria-label="Quantity" />
+                <button class="qty-plus" aria-label="Increase quantity">+</button>
+              </div>
+              <div class="ci-line-price">$319.98</div>
+              <button class="ci-remove" aria-label="Remove item">✕ Remove</button>
+            </div>
+          </article>
+
+          <article class="cart-item" data-price="199.99" data-qty="1">
+            <div class="ci-img">12GA</div>
+            <div class="ci-body">
+              <h3><a href="product.html">12 Gauge — 00 Buck — Winchester — 250 Rounds</a></h3>
+              <ul class="ci-specs">
+                <li>SKU: 12GA-WIN-00</li>
+                <li>250 rounds</li>
+                <li>80¢ / round</li>
+              </ul>
+              <span class="ci-stock low">⚠ Only 4 left — reserve soon</span>
+            </div>
+            <div class="ci-controls">
+              <div class="qty-stepper">
+                <button class="qty-minus" aria-label="Decrease quantity">−</button>
+                <input class="qty-input" type="text" inputmode="numeric" value="1" aria-label="Quantity" />
+                <button class="qty-plus" aria-label="Increase quantity">+</button>
+              </div>
+              <div class="ci-line-price">$199.99</div>
+              <button class="ci-remove" aria-label="Remove item">✕ Remove</button>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Empty state (hidden until cart emptied) -->
+        <div class="cart-empty" id="cart-empty" hidden>
+          <div class="cart-empty-ico">🛒</div>
+          <h2>Your cart is empty</h2>
+          <p>Looks like you haven't reserved any ammo yet.</p>
+          <a href="index.html" class="btn btn-primary">Shop All Ammo</a>
+        </div>
+
+        <!-- Order summary -->
+        <aside class="order-summary" id="order-summary">
+          <h2>Order Summary</h2>
+
+          <div class="os-row"><span>Subtotal</span><span id="os-subtotal">$769.96</span></div>
+          <div class="os-row"><span>Local pickup</span><span class="os-free">FREE</span></div>
+          <div class="os-row os-muted"><span>Estimated tax (8.25%)</span><span id="os-tax">$63.52</span></div>
+          <div class="os-row os-total"><span>Estimated Total</span><span id="os-total">$833.48</span></div>
+
+          <a href="checkout.html" class="btn btn-primary btn-block os-checkout">Proceed to Checkout</a>
+          <a href="index.html" class="os-continue">← Continue shopping</a>
+
+          <div class="os-promo">
+            <input type="text" placeholder="Promo code" aria-label="Promo code" />
+            <button class="btn btn-accent" onclick="return false;">Apply</button>
+          </div>
+
+          <ul class="os-reassure">
+            <li><span class="ico">📍</span> Reserve now, pay &amp; pick up at our Central Texas counter</li>
+            <li><span class="ico">🛡️</span> Backed by our $100 satisfaction guarantee</li>
+            <li><span class="ico">🪪</span> Valid ID required at pickup (handgun ammo 21+)</li>
+          </ul>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <a href="index.html" class="logo footer-logo">
+        <span class="logo-star">★</span>
+        <span class="logo-text">TX<strong>BALLISTICS</strong></span>
+      </a>
+      <ul class="footer-links">
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="#">Store &amp; Pickup</a></li>
+        <li><a href="#">Free Targets</a></li>
+        <li><a href="#">Terms &amp; Conditions</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Texas Gun Laws</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>© 2026 TX Ballistics, LLC · Central Texas · Must be 18+ (handgun ammo 21+) to purchase.</p>
+        <span class="bbb-badge">★ BBB Accredited</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/cart.js"></script>
+</body>
+</html>

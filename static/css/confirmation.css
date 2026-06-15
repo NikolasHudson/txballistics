@@ -1,0 +1,121 @@
+/* ===========================================================
+   TX Ballistics — Order Confirmation page
+   =========================================================== */
+
+.util-ico { font-size: 14px; }
+.btn-ghost.btn-dark { color: var(--green); border-color: var(--green); }
+.btn-ghost.btn-dark:hover { background: var(--green); color: #fff; }
+
+/* ---------- Hero ---------- */
+.confirm-hero {
+  background:
+    linear-gradient(rgba(22, 41, 30, 0.9), rgba(22, 41, 30, 0.94)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M0 39h40M39 0v40' stroke='%23ffffff' stroke-opacity='0.04' stroke-width='1'/%3E%3C/svg%3E"),
+    var(--green-dark);
+  color: #fff; text-align: center; padding: 56px 0 48px;
+}
+.confirm-check {
+  width: 74px; height: 74px; margin: 0 auto 18px;
+  border-radius: 50%; background: var(--green-light); border: 3px solid #6fd08c;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 40px; color: #fff; font-weight: 700;
+}
+.confirm-hero h1 { font-size: 44px; text-transform: uppercase; }
+.confirm-sub { max-width: 560px; margin: 14px auto 0; color: #dfe6df; font-size: 17px; }
+.confirm-order { margin-top: 16px; color: var(--khaki); font-size: 15px; }
+.confirm-order strong { color: #fff; }
+
+/* ---------- Layout ---------- */
+.confirm-layout { display: grid; grid-template-columns: 1fr 340px; gap: 28px; align-items: start; }
+.confirm-main { display: grid; gap: 20px; }
+
+/* ---------- Cards ---------- */
+.confirm-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; }
+.confirm-card h2 { font-size: 20px; text-transform: uppercase; color: var(--green-dark); margin-bottom: 16px; }
+
+/* ---------- Pickup pass ---------- */
+.pickup-pass { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.pass-head {
+  display: flex; justify-content: space-between; align-items: center;
+  background: var(--green-dark); color: #fff; padding: 12px 22px;
+}
+.pass-label { font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+.pass-status { background: var(--orange); color: #fff; font-family: 'Oswald', sans-serif; font-size: 12px; font-weight: 600; text-transform: uppercase; padding: 4px 12px; border-radius: 999px; }
+.pass-body { text-align: center; padding: 24px 22px; }
+.pass-code { display: inline-flex; flex-direction: column; align-items: center; gap: 8px; }
+.barcode { width: 240px; height: 70px; }
+.pass-number { font-family: 'Oswald', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: 3px; color: var(--ink); }
+.pass-hint { color: var(--muted); font-size: 13px; margin-top: 14px; }
+
+/* ---------- What to bring ---------- */
+.bring-card { border-left: 4px solid var(--orange); }
+.bring-list { list-style: none; display: grid; gap: 11px; }
+.bring-list li { display: flex; gap: 11px; font-size: 15px; color: #4a4a42; align-items: flex-start; }
+.bring-list .ico { color: var(--green-light); font-weight: 700; }
+.bring-note { margin-top: 16px; font-size: 13px; color: var(--muted); background: var(--sand); border-radius: var(--radius); padding: 12px 14px; }
+
+/* ---------- Items ---------- */
+.confirm-items { list-style: none; display: grid; gap: 14px; border-bottom: 1px solid var(--line); padding-bottom: 16px; margin-bottom: 14px; }
+.confirm-items li { display: grid; grid-template-columns: 48px 1fr auto; gap: 14px; align-items: center; }
+.ci-thumb {
+  height: 48px; border-radius: 6px;
+  background: repeating-linear-gradient(45deg, var(--sand), var(--sand) 8px, var(--stripe) 8px, var(--stripe) 16px);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 13px; color: var(--green);
+}
+.ci-meta { display: flex; flex-direction: column; font-size: 13px; }
+.ci-meta strong { font-size: 15px; color: var(--green-dark); }
+.ci-meta span { color: var(--muted); }
+.ci-price { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 16px; }
+
+.confirm-totals { display: grid; gap: 4px; }
+.ct-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 15px; }
+.ct-row.ct-muted { color: var(--muted); font-size: 14px; }
+.os-free { color: var(--green-light); font-weight: 700; }
+.ct-total { border-top: 2px solid var(--line); margin-top: 6px; padding-top: 12px; font-family: 'Oswald', sans-serif; font-size: 20px; font-weight: 700; color: var(--green-dark); }
+.paid-note { margin-top: 12px; color: var(--green-light); font-weight: 600; font-size: 14px; }
+
+/* ---------- Aside: pickup location ---------- */
+.confirm-aside { display: grid; gap: 20px; position: sticky; top: 20px; }
+.map-embed {
+  position: relative; height: 170px; border-radius: var(--radius); overflow: hidden;
+  background: #dfe6df; border: 1px solid var(--line); margin-bottom: 16px;
+}
+.map-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(31,61,43,0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(31,61,43,0.12) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+.map-embed::after {
+  content: ""; position: absolute; top: 0; left: 38%; width: 16px; height: 100%;
+  background: #cdd6cd; transform: rotate(12deg);
+}
+.map-pin { position: absolute; top: 52%; left: 50%; transform: translate(-50%,-100%); font-size: 34px; z-index: 2; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.3)); }
+.map-tag { position: absolute; top: 52%; left: 50%; transform: translate(-50%, 10px); background: var(--green-dark); color: #fff; font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 999px; white-space: nowrap; z-index: 2; }
+
+.store-block strong { font-size: 17px; color: var(--green-dark); }
+.store-block p { color: #4a4a42; font-size: 14px; margin-top: 4px; }
+.store-hours-list { list-style: none; margin: 16px 0; border-top: 1px solid var(--line); }
+.store-hours-list li { display: flex; justify-content: space-between; padding: 8px 0; font-size: 14px; border-bottom: 1px solid var(--line); color: #4a4a42; }
+.store-hours-list .closed { color: var(--red); font-weight: 600; }
+.ready-eta { background: var(--khaki); color: var(--green-dark); font-size: 14px; font-weight: 600; padding: 10px 14px; border-radius: var(--radius); margin-bottom: 14px; }
+.pickup-card .btn { margin-bottom: 10px; }
+
+/* ---------- Help card ---------- */
+.help-card p { color: #4a4a42; font-size: 14px; }
+.help-line { font-weight: 600; color: var(--green-dark); margin-top: 8px !important; }
+
+/* ---------- CTA ---------- */
+.confirm-cta { display: flex; justify-content: center; gap: 14px; margin-top: 32px; flex-wrap: wrap; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 960px) {
+  .confirm-layout { grid-template-columns: 1fr; }
+  .confirm-aside { position: static; }
+}
+@media (max-width: 720px) {
+  .confirm-hero h1 { font-size: 32px; }
+  .barcode { width: 200px; }
+}
